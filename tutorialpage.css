@@ -1,0 +1,168 @@
+:root {  
+     --main-color_1: #a8b1ff;
+     --main-color_2: #5c73e7;
+     --main-color_3: #3e63dd;
+     --black-color: #1b1b1f;
+     --grey-color: #414853;
+     --grey-color_2: #515c67;
+     --text-color: rgba(255, 255, 245, .86);
+}
+
+.sandmod-tutorial-content {
+    padding: 20px;
+}
+
+.header-title {
+    display: flex;
+    align-items: center;
+    font-size: 10px;
+    margin: 0px;
+    border-radius: 5px;
+    color: var(--text-color);
+    height: 32px;
+    width: 100%;
+}
+
+.sandmod-tutorial-title {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--text-color);
+    width: fit-content;
+    background-color: var(--main-color_3);
+    padding-left: 25px;
+    padding-right: 25px;
+    border-radius: 25px;
+    height: 32px;
+}
+
+.tutorial-content-main {
+    padding: 20px;
+}
+
+.subheader-title {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--text-color);
+    width: auto;
+    border-radius: 5px;
+    width: fit-content;
+    height: 24px;
+    color: #b9b9b9;
+    transition: 0.2s ease-in-out;
+}
+
+.subheader-title svg {
+    display: flex;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+    stroke: var(--main-color_2);
+    transition: 0.2s ease-in-out;
+}
+
+.subheader-title:hover {
+    cursor: pointer;
+}
+
+.subheader-title:hover svg {
+    stroke: var(--main-color_1);
+}
+
+.paragraph-title {
+    display: flex;
+    align-items: flex-start;
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-top: 20px;
+    margin-left: 20px;
+    transition: 0.2s ease-in-out;
+    color: #c4c4c4;
+}
+
+.paragraph-title:hover {
+    cursor: pointer;
+}
+
+.paragraph-title svg {
+    display: flex;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    stroke: var(--main-color_1);
+    transition: 0.2s ease-in-out;
+}
+
+.sandmod-tutorial-paragraph {
+    display: block;
+    font-size: 16px;
+    color: var(--text-color);
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
+.image-title {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    height: 400px;
+    margin-left: 20px;
+    background: var(--black-color);
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.sandmod-tutorial-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.link-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--text-color);
+    transition: 0.2s ease-in-out;
+}
+
+.sandmod-tutorial-link {
+    font-size: 16px;
+    text-decoration-color: var(--main-color_1);
+    transition: 0.2s ease-in-out;
+    margin: 5px;
+    padding: 0px;
+    color: var(--main-color_1);
+}
+
+.youtube-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-left: 20px;
+    transition: 0.2s ease-in-out;
+}
+
+.yt-title {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    height: 400px;
+    margin-left: 20px;
+    background: var(--black-color);
+    overflow: hidden;
+    margin-top: 10px;
+    border-radius: 10px;
+}

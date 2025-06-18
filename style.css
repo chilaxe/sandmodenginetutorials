@@ -1,0 +1,857 @@
+/* =========================
+    Variables
+    ========================= */
+:root {  
+     --main-color_1: #a8b1ff;
+     --main-color_2: #5c73e7;
+     --main-color_3: #38383888;
+     --black-color: #1b1b1f;
+     --grey-color: #414853;
+     --grey-color_2: #515c67;
+     --text-color: rgba(255, 255, 245, .86);
+}
+
+/* =========================
+    Base Styles
+    ========================= */
+body {
+     font-family: "Punctuation SC", "Inter", ui-sans-serif, system-ui, "PingFang SC", "Noto Sans CJK SC", "Noto Sans SC", "Heiti SC", "Microsoft YaHei", "DengXian", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+     background-color: var(--black-color);
+     color: var(--text-color);
+     margin: 0;
+     padding: 0;
+     overflow-x: hidden;
+}
+
+/* =========================
+    Header
+    ========================= */
+.sandmod-header {
+     display: flex;
+     align-items: center;
+     padding: 5px 20px;
+     justify-content: center;
+     color: var(--text-color);
+     border-bottom: 1px solid var(--grey-color);
+}
+
+.sandmod-header-container {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 10px 20px;
+     background-color: var(--black-color);
+     border-bottom: 1px solid var(--grey-color);
+}
+
+.sandmod-logo {
+     padding-bottom: 5px;
+}
+
+.sandmod-logo-icon {
+     width: 128px;
+}
+
+/* =========================
+    Sidebar
+    ========================= */
+.sandmod-sidebar {
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 200px;
+     height: 100vh;
+     color: var(--text-color);
+     border-right: 1px solid var(--grey-color);
+     padding: 10px 20px;
+     background-color: var(--black-color);
+     z-index: 10;
+}
+
+.sandmod-links-list {
+     list-style: none;
+     padding: 0;
+     margin: 0;
+}
+
+.sandmod-link-sidebar {
+     display: flex;
+     align-items: center;
+     background-color: none;
+     color: rgba(235, 235, 245, .6);
+     text-decoration: none;
+     padding: 5px;
+     margin: 5px;
+     height: 24px;
+     font-size: 12px;
+     font-weight: bold;
+     transition: 0.2s ease-in-out;
+     border-radius: 5px;
+}
+
+.sandmod-link-sidebar:hover,
+.sandmod-link-sidebar.active {
+     color: var(--main-color_1);
+}
+
+.sandmod-link-sidebar:hover svg,
+.sandmod-link-sidebar.active svg {
+     stroke: var(--main-color_1);
+}
+
+.sandmod-link-sidebar:hover .dc-svg,
+.sandmod-link-sidebar:hover .sandmod-svg {
+     fill: var(--main-color_1);
+}
+
+.sandmod-link-sidebar .sandmod-svg {
+     width: 24px;
+     height: 24px;
+     fill: rgba(235, 235, 245, .6);
+}
+
+.sandmod-link-sidebar svg {
+     display: flex;
+     margin-right: 10px;
+     stroke: rgba(235, 235, 245, .6);
+     transition: 0.2s ease-in-out;
+}
+
+.sandmod-link-sidebar img {
+     display: flex;
+     margin-right: 10px;
+}
+
+.sandmod-link-sidebar.links {
+     background-color: var(--main-color_3);
+     border-radius: 5px;
+     padding: 10px;
+     margin: 10px;
+}
+
+.sandmod-link-sidebar.links:hover {
+     background-color: var(--main-color_2);
+     color: var(--text-color);
+}
+
+.sandmod-link-sidebar.links:hover svg {
+     fill: var(--text-color);
+}
+
+/* Sidebar Tools */
+.sandmod-sidebar-tool-btn {
+     display: flex;
+     align-items: center;
+     position: relative;
+     background-color: transparent;
+     border: none;
+     color: rgba(235, 235, 245, .6);
+     text-decoration: none;
+     padding: 5px;
+     margin: 5px;
+     font-weight: bold;
+     font-size: 13px;
+     transition: 0.2s ease-in-out;
+     cursor: pointer;
+}
+
+.sandmod-sidebar-tool-btn svg {
+     display: flex;
+     margin-right: 10px;
+     stroke: rgba(235, 235, 245, .6);
+     transition: 0.2s ease-in-out;
+}
+
+.sandmod-sidebar-tool-btn-arrow-icon {
+     position: absolute;
+     right: -128px;
+     top: 50%;
+     width: 18px;
+     height: 18px;
+     transform: translateY(-50%);
+     transition: 0.2s ease-in-out;
+}
+
+.sandmod-sidebar-tool-btn:hover,
+.sandmod-sidebar-tool-btn:focus {
+     color: var(--main-color_1);
+}
+
+.sandmod-sidebar-tool-btn:hover svg {
+     stroke: var(--main-color_1);
+}
+
+.sandmod-sidebar-tool-btn:focus svg {
+     stroke: var(--main-color_1);
+}
+
+.sandmod-sidebar-tools-list {
+     display: none;
+     list-style: none;
+     border-left: 1px solid var(--grey-color);
+     margin-left: 20px;
+     padding-left: 0px;
+}
+
+.sandmod-sidebar-tool {
+     display: flex;
+     align-items: center;
+     background-color: none;
+     color: rgba(235, 235, 245, .6);
+     text-decoration: none;
+     padding: 5px;
+     margin: 5px;
+     font-weight: bold;
+     font-size: 13px;
+     transition: 0.2s ease-in-out;
+}
+
+.sandmod-sidebar-tool:hover,
+.sandmod-sidebar-tool.active {
+     color: var(--main-color_1);
+}
+
+.sandmod-sidebar-tool svg {
+     display: flex;
+     margin-right: 10px;
+     stroke: rgba(235, 235, 245, .6);
+     transition: 0.2s ease-in-out;
+}
+
+.sandmod-sidebar-tool:hover svg,
+.sandmod-sidebar-tool.active svg {
+     stroke: var(--main-color_1);
+}
+
+/* =========================
+    Main Content
+    ========================= */
+.sandmod-maincontent {
+     flex: 1;
+     color: var(--text-color);
+     margin-left: 241px;
+     margin-top: 0;
+     z-index: 0;
+     position: absolute;
+     width: calc(100% - 241px);
+}
+
+/* =========================
+    Tutorials
+    ========================= */
+.sandmod-tutorials {
+     display: flex;
+     flex-direction: column;
+     gap: 10px;
+}
+
+.sandmod-tutorials-content {
+     padding: 20px;
+     background-color: var(--black-color);
+}
+
+.sandmod-forum-tutorial {
+     position: relative;
+     border: 1px solid #2e2e32;
+     padding: 5px;
+     transition: 0.2s ease-in-out;
+     cursor: pointer;
+     width: 100%;
+     height: 90px;
+     margin: 0px;
+}
+
+.sandmod-forum-tutorial:hover {
+     border-color: var(--main-color_1);
+}
+
+.sandmod-tutorial-header {
+     display: flex;
+     align-items: flex-start;
+     width: 100%;
+     height: 20px;
+     border-radius: 5px 5px 0px 0px;
+}
+
+.tutorial-ico {
+     width: 20px;
+     height: 20px;
+     margin-right: 5px;
+}
+
+.tutorial-ico svg {
+     width: 20px;
+     height: 20px;
+     stroke: rgba(235, 235, 245, .6);
+}
+
+.tutorial-type {
+     display: flex;
+     align-items: center;
+     justify-content: flex-start;
+     margin-right: auto;
+     position: absolute;
+     top: 5px;
+     right: 5px;
+}
+
+.type-1,
+.type-2 {
+     padding: 2px 5px;
+     border-radius: 3px;
+}
+
+.type-1 svg,
+.type-2 svg {
+     width: 16px;
+     height: 16px;
+     stroke: rgba(235, 235, 245, .6);
+}
+
+.tutorial-maincontent {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     gap: 10px;
+     padding: 10px;
+     color: var(--text-color);
+}
+
+.tutorial-title {
+     display: flex;
+     flex-direction: column;
+     align-items: flex-start;
+     font-size: 14px;
+     font-weight: bold;
+     color: rgba(199, 199, 255, 0.781);
+     margin-bottom: 2px;
+     width: 100%;
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
+}
+
+.tutorial-credits {
+     display: flex;
+     align-items: center;
+     position: relative;
+     color: rgba(235, 235, 245, .6);
+     font-size: 12px;
+     width: 100%;
+}
+
+.tutorial-credit-pfp {
+     display: flex;
+     align-items: center;
+     gap: 6px;
+}
+
+.tutorial-credit-pfp-img {
+     width: 24px;
+     height: 24px;
+     border-radius: 50%;
+     overflow: hidden;
+     flex-shrink: 0;
+}
+
+.tutorial-credit-pfp-img img {
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+     display: block;
+}
+
+.tutorial-credit-pf-name {
+     color: rgba(235, 235, 245, .6);
+     text-decoration: none;
+     transition: color 0.2s ease-in-out;
+     display: inline-block;
+     white-space: nowrap;
+     width: 100%;
+     overflow: hidden;
+}
+
+/* =========================
+    Assets
+    ========================= */
+.sandmod-assets-list {
+     display: flex;
+     flex-direction: column;
+     gap: 10px;
+     padding: 10px;
+}
+
+.sandmod-asset-item {
+     position: relative;
+     padding: 10px;
+     border: 1px solid var(--grey-color);
+     transition: 0.2s ease-in-out;
+     width: 240px;
+     cursor: pointer;
+}
+
+.sandmod-asset-item:hover {
+     border-color: var(--main-color_1);
+}
+
+.sandmod-asset-header {
+     display: flex;
+     align-items: center;
+     gap: 10px;
+     height: 32px;
+}
+
+.sandmod-asset-header svg {
+     width: 20px;
+     height: 20px;
+     stroke: rgba(235, 235, 245, .6);
+}
+
+.sandmod-asset-preview-image {
+     width: 100%;
+     height: 200px;
+     overflow: hidden;
+     border-radius: 5px;
+}
+
+.sandmod-asset-type-2 {
+     position: absolute;
+     top: 10px;
+     right: 10px;
+}
+
+.sandmod-asset-type-icon svg {
+     position: absolute;
+     top: 10px;
+     left: 10px;
+}
+
+.sandmod-asset-info {
+     display: flex;
+     flex-direction: column;
+     align-items: flex-start;
+     gap: 5px;
+     margin-top: 10px;
+}
+
+.sandmod-asset-title {
+     font-size: 14px;
+     font-weight: bold;
+     color: rgba(199, 199, 255, 0.781);
+     margin-bottom: 5px;
+     width: 100%;
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
+}
+
+.sandmod-asset-model-viewer {
+     width: 100%;
+     background-color: #272727;
+}
+
+.sandmod-assets-content {
+     display: grid;
+     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+     gap: 16px 16px;
+     padding: 20px;
+     background-color: var(--black-color);
+}
+
+.sandmod-tool-asset {
+     background-color: transparent;
+     border: none;
+     margin: 5px;
+     padding: 0px;
+}
+
+.sandmod-tool-asset svg {
+     width: 24px;
+     height: 24px;
+     stroke: rgba(235, 235, 245, .6);
+     transition: 0.2s ease-in-out;
+     cursor: pointer;
+}
+
+.sandmod-tool-asset:hover svg {
+     stroke: var(--main-color_1);
+}
+
+.credits-assets,
+.tools-assets {
+     display: flex;
+}
+
+/* =========================
+    Favorites Section
+    ========================= */
+.sandmod-favorites-section {
+     display: flex;
+     flex-direction: column;
+     gap: 10px;
+     padding: 10px;
+}
+
+.sandmod-favorites-section h2 {
+     font-size: 16px;
+     font-weight: bold;
+     color: #acacac;
+     margin: 0px;
+}
+
+/* =========================
+    Filter & Search
+    ========================= */
+.filter {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     background-color: var(--black-color);
+}
+
+.sandmod-tutorial-filter-btn {
+     display: flex;
+     align-items: center;
+     background-color: transparent;
+     border: none;
+     color: rgba(235, 235, 245, .6);
+     text-decoration: none;
+     padding: 5px;
+     font-weight: bold;
+     font-size: 13px;
+     transition: 0.2s ease-in-out;
+     cursor: pointer;
+}
+
+.sandmod-tutorial-filter-btn svg {
+     display: flex;
+     margin-left: 5px;
+     margin-right: 5px;
+     stroke: rgba(235, 235, 245, .6);
+     transition: 0.2s ease-in-out;
+}
+
+.sandmod-tutorial-filter-btn:hover svg,
+.sandmod-tutorial-filter-btn.active svg {
+     stroke: var(--main-color_1);
+}
+
+.sandmod-tutorial-filter-btn.active {
+     color: var(--main-color_1);
+}
+
+.filter-area {
+     display: none;
+     border-left: 1px solid var(--grey-color);
+     align-items: center; 
+     padding-left: 5px;
+     transition: 0.2s ease-in-out;
+}
+
+.filter-btn {
+     display: flex;
+     align-items: center;
+     background-color: transparent;
+     border: none;
+     color: rgba(235, 235, 245, .6);
+     text-decoration: none;
+     font-weight: bold;
+     font-size: 13px;
+     transition: 0.2s ease-in-out;
+}
+
+.filter-btn:hover svg {
+     stroke: rgba(235, 235, 245, .6);
+}
+
+/* =========================
+    Search
+    ========================= */
+.sandmod-search {
+     display: flex;
+     align-items: center;
+     background-color: transparent;
+     border: none;
+     color: rgba(235, 235, 245, .6);
+     text-decoration: none;
+     font-weight: bold;
+     font-size: 13px;
+     transition: 0.2s ease-in-out;
+}
+
+.sandmod-search-form {
+     display: flex;
+     align-items: center;
+}
+
+.sandmod-search-input {
+     background-color: transparent;
+     border: none;
+     color: rgba(235, 235, 245, .6);
+     font-size: 13px;
+     padding: 5px;
+     width: 200px;
+     height: 24px;
+     outline: none;
+     transition: border-color 0.2s ease-in-out;
+     border: 1px solid var(--grey-color);
+     border-radius: 0px 5px 5px 0px;
+     border-left: none;
+}
+
+.sandmod-search-input:focus {
+     border-color: var(--main-color_1);
+}
+
+.sandmod-search-button {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     background-color: transparent;
+     border: none;
+     color: rgba(235, 235, 245, .6);
+     text-decoration: none;
+     padding: 5px;
+     font-weight: bold;
+     font-size: 13px;
+     width: 36px;
+     height: 36px;
+     transition: 0.2s ease-in-out;
+     border-radius: 5px 0px 0px 5px;
+     border: 1px solid var(--grey-color);
+     border-right: none;
+     cursor: pointer;
+}
+
+.sandmod-search-button svg {
+     width: 16px;
+     height: 16px;
+     display: flex;
+     stroke: rgba(235, 235, 245, .6);
+     transition: 0.2s ease-in-out;
+}
+
+.sandmod-search-form:focus-within .sandmod-search-button {
+     border-color: var(--main-color_1);
+}
+
+/* =========================
+    Miscellaneous
+    ========================= */
+.sandmod-horizontal-separator {
+     width: 100%;
+     height: 1px;
+     background-color: var(--grey-color);
+     margin: 10px 0;
+}
+
+.path  {
+     color: var(--main-color_1);
+     font-weight: bold;
+     font-size: 14px;
+     margin-right: 10px;
+}
+
+.credits {
+     position: absolute;
+     bottom: 10px;
+     left: 10px;
+     color: rgba(235, 235, 245, .6);
+     font-size: 12px;
+}
+
+.credits-text {
+     color: rgba(235, 235, 245, .6);
+     text-decoration: none;
+     transition: color 0.2s ease-in-out;
+}
+
+.credits-text-highlight {
+     color: var(--main-color_1);
+     text-decoration: none;
+     transition: color 0.2s ease-in-out;
+}
+
+.pfp {
+     display: flex;
+     align-items: center;
+}
+
+.pfp-image {
+     display: flex;
+     width: 24px;
+     height: 24px;
+     border-radius: 50%;
+     overflow: hidden;
+     flex-shrink: 0;
+}
+
+.pfp-name {
+     display: flex;
+     color: rgba(235, 235, 245, .6);
+     text-decoration: none;
+     transition: color 0.2s ease-in-out;
+     display: inline-block;
+     white-space: nowrap;
+     width: 145px;
+     font-size: 12px;
+     overflow: hidden;
+     margin-left: 5px;
+}
+
+.sandmod-tutorial-tools-btn {
+     position: absolute;
+     bottom: 0px;
+     right: 22px;
+     background-color: transparent;
+     border: none;
+     color: rgba(235, 235, 245, .6);
+     text-decoration: none;
+     font-weight: bold;
+     font-size: 13px;
+     transition: 0.2s ease-in-out;
+     cursor: pointer;
+}
+
+.sandmod-tutorial-tools-btn:not(:first-child) {
+     position: absolute;
+     bottom: 0px;
+     right: -10px;
+}
+
+.sandmod-tutorial-tools-btn svg {
+     display: flex;
+     stroke: rgba(235, 235, 245, .6);
+     transition: 0.2s ease-in-out;
+}
+
+.sandmod-tutorial-tools-btn:hover svg {
+     stroke: var(--main-color_1);
+}
+
+.tools-tutorial {
+     display: flex;
+     align-items: center;
+}
+
+/* =========================
+    Scrollbar
+    ========================= */
+::-webkit-scrollbar {
+     width: 4px;
+}
+::-webkit-scrollbar-thumb {
+     background-color: var(--grey-color);
+     border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+     background-color: var(--grey-color_2);
+}
+::-webkit-scrollbar-track {
+     background-color: transparent;
+}
+
+/* =========================
+    Other
+    ========================= */
+
+.no-results-message {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     height: 100%;
+     width: 300px;
+     color: rgba(235, 235, 245, .6);
+     font-size: 16px;
+     font-weight: bold;
+}
+
+.overlay-window-asset {
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background-color: rgba(0, 0, 0, 0.8);
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     z-index: 20;
+}
+
+.overlay-window-asset-content {
+    background-color: var(--black-color);
+    padding: 20px;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--grey-color);
+    position: relative;
+}
+
+.close-overlay-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    color: rgba(235, 235, 245, .6);
+    cursor: pointer;
+}
+
+.asset-perview {
+    width: 100%;
+    height: 300px;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #272727;
+    margin-top: 20px;
+}
+
+.asset-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.asset-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: rgba(199, 199, 255, 0.781);
+    margin: 0px;
+    padding: 0px;
+    margin-top: 5px;
+}
+
+.asset-description {
+    font-size: 14px;
+    color: rgba(235, 235, 245, .6);
+    margin: 0px;
+    padding: 0px;
+}
+
+.asset-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.download-asset-btn {
+    color: var(--text-color);
+    border: 1px solid var(--grey-color);
+    padding: 10px 20px;
+    border-radius: 5px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.download-asset-btn:hover {
+    border-color: var(--main-color_2);
+    color: #a3a3a3;
+}

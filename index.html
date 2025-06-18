@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    
+    <title>SandModTutorials - Expert Tutorials & Creator Tools</title>
+    
+    <meta name="description" content="Discover comprehensive tutorials and tools for SandMod. Learn, create, and share with the SandMod community." />
+    <meta name="keywords" content="SandMod, tutorials, creator center, blockman, modding, gaming tutorials, sandbox modding" />
+    <meta name="author" content="Chilaxe" />
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/logo_sandmod_original.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="./style.css" />
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+    <script src="./script.js" defer></script>
+</head>
+<body>
+        <div class="sandmod-maincontent">
+        <div class="sandmod-tutorials">
+            <header class="sandmod-header-container ">
+                <div class="path">
+                    <span>
+                        SandMod/Tutorials/
+                    </span>
+                </div>
+                <div class="filter">
+                    <button class="sandmod-tutorial-filter-btn filter-btn" title="filter">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e3e3e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-funnel-icon lucide-funnel"><path d="M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z"/></svg>
+                        </span>
+                    </button>
+                    <div class="filter-area" id="tutorial-filters">
+                        <button class="sandmod-tutorial-filter-btn active" data-filter-type="tutorial" data-value="all" title="Show All Tutorials">All</button>
+                        <button class="sandmod-tutorial-filter-btn" data-filter-type="tutorial" data-value="Text" title="Filter Text Tutorials">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-type"><path d="M12 4v16"/><path d="M4 7V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2"/><path d="M9 20h6"/></svg>
+                            </span>
+                        </button>
+                        <button class="sandmod-tutorial-filter-btn" data-filter-type="tutorial" data-value="Video" title="Filter Video Tutorials">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clapperboard"><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"/><path d="m6.2 5.3 3.1 3.9"/><path d="m12.4 3.4 3.1 4"/><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="sandmod-search">
+                    <form class="sandmod-search-form"> 
+                        <button type="submit" class="sandmod-search-button" aria-label="Search Tutorials">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e3e3e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+                        </button>
+                        <div class="separator"></div>
+                        <input type="text" class="sandmod-search-input" id="tutorial-search-input" placeholder="Search Tutorials..." name="tutorial_search" aria-label="Search Tutorials">
+                    </form>
+                </div>
+            </header>
+            <div class="sandmod-tutorials-content" id="tutorials-container"></div>
+        </div>
+    </div>
+    <div class="sandmod-sidebar">
+        <header class="sandmod-header">
+            <div class="sandmod-logo">
+                <img src="./assets//logo_sandmod.svg" alt="SandMod Logo" class="sandmod-logo-icon">
+            </div>
+        </header>
+        <div class="sandmod-links">
+            <ul class="sandmod-links-list">
+                <li><a href="./" class="sandmod-link-sidebar active" target="_self" title="Tutorials">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e3e3e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-graduation-cap-icon lucide-graduation-cap"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
+                    </span>
+                    <span>
+                        Tutorials
+                    </span>
+                </a></li>
+                <li><a href="./assets.html" class="sandmod-link-sidebar" target="_self" title="Assets">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e3e3e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package-icon lucide-package"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></svg>
+                    </span>
+                    <span>
+                        Assets
+                    </span>
+                </a></li>
+                    <li><a href="./" class="sandmod-link-sidebar" target="_self" title="BlockMan Creator Center">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e3e3e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-cog-icon lucide-user-cog"><path d="M10 15H6a4 4 0 0 0-4 4v2"/><path d="m14.305 16.53.923-.382"/><path d="m15.228 13.852-.923-.383"/><path d="m16.852 12.228-.383-.923"/><path d="m16.852 17.772-.383.924"/><path d="m19.148 12.228.383-.923"/><path d="m19.53 18.696-.382-.924"/><path d="m20.772 13.852.924-.383"/><path d="m20.772 16.148.924.383"/><circle cx="18" cy="15" r="3"/><circle cx="9" cy="7" r="4"/></svg>
+                    </span>
+                    <span>
+                        Creator Center
+                    </span>
+                </a></li>
+                        <div class="sandmod-sidebar-tools">
+                <div class="sandmod-sidebar-tool-btn-area">
+                    <button class="sandmod-sidebar-tool-btn" title="Tools">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e3e3e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wrench-icon lucide-wrench"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                        </span>
+                        <span>
+                            Tools
+                        </span>
+                        <span>
+                            <svg class="sandmod-sidebar-tool-btn-arrow-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+                        </span>
+                    </button>
+                    <ul class="sandmod-sidebar-tools-list">
+                        <li><a href="./" class="sandmod-sidebar-tool" title="themes">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e3e3e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-swatch-book-icon lucide-swatch-book"><path d="M11 17a4 4 0 0 1-8 0V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2Z"/><path d="M16.7 13H19a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H7"/><path d="M 7 17h.01"/><path d="m11 8 2.3-2.3a2.4 2.4 0 0 1 3.404.004L18.6 7.6a2.4 2.4 0 0 1 .026 3.434L9.9 19.8"/></svg>
+                            </span>
+                            <span>
+                                Themes
+                            </span>
+                        </a></li>
+                        <li><a href="./" class="sandmod-sidebar-tool" title="create tutorial">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e3e3e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                            </span>
+                            <span>
+                                Create Tutorial
+                            </span>
+                        </a></li>
+                        <li><a href="./" class="sandmod-sidebar-tool" title="upload assets">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e3e3e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder-up-icon lucide-folder-up"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/><path d="M12 10v6"/><path d="m9 13 3-3 3 3"/></svg>
+                            </span>
+                            <span>
+                                Upload Assets
+                            </span>
+                        </a></li>
+                        <li><a href="./favorites.html" class="sandmod-sidebar-tool" title="favorites">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-marked-icon lucide-book-marked"><path d="M10 2v8l3-3 3 3V2"/><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg>
+                            </span>
+                            <span>
+                                Favorites
+                            </span>
+                        </a></li>
+                    </ul>
+                </div>
+                <div class="sandmod-horizontal-separator"></div>
+                <li><a href="./" class="sandmod-link-sidebar links" target="_self" title="SandMod Website">
+                    <span>
+                        <svg class="sandmod-svg"  fill="#e3e3e3" width="46" height="52" viewBox="0 0 40 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <g clip-path="url(#a)">
+                            <path d="M34.802 9.357 19.087 24.76H0L25.259 0z"/>
+                            <path d="m29.11 18.495-6.393 6.265h12.784z"/>
+                            <path d="M11.009 33.505 17.4 27.24H4.618z"/>
+                            <path d="M5.317 42.644 21.032 27.24h19.087L14.86 52z"/>
+                          </g>
+                          <defs>
+                            <clipPath id="a">
+                              <path d="M0 0h160v52H0z"/>
+                            </clipPath>
+                          </defs>
+                        </svg>
+                    </span>
+                    <span>
+                        SandMod Website
+                    </span>
+                </a></li>
+                        <li><a href="./" class="sandmod-link-sidebar links" target="_self" title="SandMod Discord">
+                    <span>
+                        <svg class="dc-svg" fill="rgba(235, 235, 245, .6)" style="stroke: none;" width="24" height="24" viewBox="0 0 0.96 0.96" xmlns="http://www.w3.org/2000/svg"><path d="M.63.605A.087.087 0 0 1 .549.514.086.086 0 0 1 .63.423a.085.085 0 0 1 .081.091.086.086 0 0 1-.081.091m-.299 0A.087.087 0 0 1 .25.514.086.086 0 0 1 .331.423a.085.085 0 0 1 .081.091v.005a.086.086 0 0 1-.081.086M.792.194A.7.7 0 0 0 .613.138L.609.137H.608L.606.138.584.181.583.184a.7.7 0 0 0-.21 0L.377.183.353.134l.001.002L.352.135a.7.7 0 0 0-.188.059L.169.192.168.193A.75.75 0 0 0 .03.63q0 .041.004.081V.708L.035.71a.7.7 0 0 0 .219.112l.005.001H.26L.262.822.307.75.308.747.306.743.233.708l.002.001L.234.707.235.705.249.694h.003A.52.52 0 0 0 .707.692L.704.693h.003l.014.011.001.002-.001.002A.4.4 0 0 1 .654.74L.651.741.649.744v.001q.022.043.047.076L.695.819.698.82A.7.7 0 0 0 .925.705L.923.706.924.704A.75.75 0 0 0 .789.19l.002.002L.79.191z"/></svg>
+                    </span>
+                    <span>
+                        SandMod Discord
+                    </span>
+                </a></li>
+            </div>
+        </div>
+        <footer>
+            <div class="credits">
+                <span>
+                    <p class="credits-text">
+                        Made By <span class="credits-text-highlight">Chilaxe</span>
+                    </p>
+                </span>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
