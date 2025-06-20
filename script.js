@@ -85,7 +85,7 @@ const tutorialsData = [
         authorPfpSrc: "./assets/Untitled-1.png",
         type1: "Tutorial",
         type2: "Text",
-        tutorialLink: "./10288.html",
+        tutorialLink: "./tutorials/10288.html",
         assetDownloadLink: null, assetType: null, asset3DModel: null, assetPackage: null
     }
 ];
