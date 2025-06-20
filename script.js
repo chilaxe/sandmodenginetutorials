@@ -78,7 +78,16 @@ const svgs = {
 */
 
 const tutorialsData = [
-    // empty for now
+    {
+        id: "tut001",
+        videoTitle: "Step-by-Step Guide to Creating a Multiplayer Chat System",
+        authorName: "Chilaxe",
+        authorPfpSrc: "./assets/Untitled-1.png",
+        type1: "Tutorial",
+        type2: "Text",
+        tutorialLink: "./10288.html",
+        assetDownloadLink: null, assetType: null, asset3DModel: null, assetPackage: null
+    }
 ];
 
 // =====================
