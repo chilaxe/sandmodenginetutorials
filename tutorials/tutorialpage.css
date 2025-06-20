@@ -183,3 +183,14 @@
 .sandmod-header-container {
     position: relative;
 }
+
+.styled-comment-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--grey-color);
+}
+.styled-comment-section h2 {
+    color: var(--main-color_1);
+    font-size: 18px;
+    margin-bottom: 10px;
+}
