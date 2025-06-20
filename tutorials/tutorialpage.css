@@ -167,3 +167,19 @@
     margin-top: 10px;
     border-radius: 10px;
 }
+
+.sandmod-tutorial-tools-btn {
+    position: absolute;
+    top: 0px;
+    right: 37px;
+}
+
+.sandmod-tutorial-tools-btn:not(:first-child) {
+     position: absolute;
+     top: 0px;
+     right: 5px;
+}
+
+.sandmod-header-container {
+    position: relative;
+}

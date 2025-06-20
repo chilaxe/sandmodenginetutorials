@@ -870,3 +870,88 @@ function createAndShowAssetDetailOverlay(assetData) {
     // Add listener for the Escape key
     document.addEventListener('keydown', handleEscapeKeyForOverlay);
 }
+
+
+/**
+ * Toggle the bookmark status for a tutorial and update the button UI.
+ * @param {HTMLElement} buttonElement - The bookmark button element.
+ * @param {string} tutorialId - The tutorial's unique identifier.
+ */
+function bookmarkById(buttonElement, tutorialId) {
+    if (!buttonElement || !tutorialId) return;
+
+    const isNowBookmarked = toggleBookmark(tutorialId, 'Tutorial');
+
+    if (isNowBookmarked) {
+        buttonElement.innerHTML = svgs.bookmarkFilled;
+        buttonElement.classList.add('bookmarked');
+        buttonElement.title = 'Remove Bookmark';
+    } else {
+        buttonElement.innerHTML = svgs.bookmarkDefault;
+        buttonElement.classList.remove('bookmarked');
+        buttonElement.title = 'Bookmark this Tutorial';
+    }
+}
+
+/**
+ * Share a tutorial using the Web Share API or fallback prompt.
+ * @param {string} tutorialId - The tutorial's unique identifier.
+ */
+function shareById(tutorialId) {
+    if (!tutorialId) return;
+
+    const tutorialData = tutorialsData.find(item => item.id === tutorialId);
+
+    if (!tutorialData) {
+        console.error(`Share failed: Tutorial with ID "${tutorialId}" not found.`);
+        alert("Could not find tutorial data to share.");
+        return;
+    }
+
+    const shareURL = tutorialData.tutorialLink || window.location.href;
+    const shareTitle = tutorialData.videoTitle;
+    const shareText = `Check out this tutorial: ${shareTitle} by ${tutorialData.authorName}`;
+
+    if (navigator.share) {
+        navigator.share({
+            title: shareTitle,
+            text: shareText,
+            url: shareURL,
+        }).catch(error => console.log('Error sharing:', error));
+    } else {
+        prompt("Copy this link to share the tutorial:", shareURL);
+    }
+}
+
+// Attach event listeners for tutorial page bookmark/share buttons
+document.addEventListener('DOMContentLoaded', () => {
+    const bookmarkButton = document.getElementById('bookMarkPage_y');
+    const shareButton = document.getElementById('sharepage_y');
+
+    if (bookmarkButton) {
+        const tutorialId = bookmarkButton.getAttribute('data-id');
+        if (tutorialId) {
+            // Set initial bookmark button state
+            if (isItemBookmarked(tutorialId, 'Tutorial')) {
+                bookmarkButton.innerHTML = svgs.bookmarkFilled;
+                bookmarkButton.classList.add('bookmarked');
+                bookmarkButton.title = 'Remove Bookmark';
+            } else {
+                bookmarkButton.innerHTML = svgs.bookmarkDefault;
+                bookmarkButton.title = 'Bookmark this Tutorial';
+            }
+            bookmarkButton.addEventListener('click', () => {
+                bookmarkById(bookmarkButton, tutorialId);
+            });
+        }
+    }
+
+    if (shareButton) {
+        const tutorialId = shareButton.getAttribute('data-id');
+        if (tutorialId) {
+            shareButton.addEventListener('click', () => {
+                shareById(tutorialId);
+            });
+        }
+    }
+});
