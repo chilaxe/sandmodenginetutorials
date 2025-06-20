@@ -923,6 +923,15 @@ body {
     margin-bottom: 2rem;
 }
 
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 @media (min-width: 768px) {
     .flex-container {
         flex-direction: row;
@@ -938,3 +947,4 @@ body {
         font-size: 3rem;
     }
 }
+
