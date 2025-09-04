@@ -87,7 +87,7 @@ const tutorialsData = [
         type2: "Text",
         tutorialLink: "./tutorials/10288.html",
         assetDownloadLink: null, assetType: null, asset3DModel: null, assetPackage: null
-    }
+    },
 ];
 
 // =====================

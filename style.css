@@ -86,7 +86,6 @@ body {
      font-size: 12px;
      font-weight: bold;
      transition: 0.2s ease-in-out;
-     border-radius: 5px;
 }
 
 .sandmod-link-sidebar:hover,
@@ -97,6 +96,15 @@ body {
 .sandmod-link-sidebar:hover svg,
 .sandmod-link-sidebar.active svg {
      stroke: var(--main-color_1);
+}
+
+.sandmod-sidebar-tool {
+     border-left: 1px solid var(--grey-color);
+}
+
+.sandmod-sidebar-tool:hover,
+.sandmod-sidebar-tool.active {
+     border-left: 1px solid var(--main-color_1);
 }
 
 .sandmod-link-sidebar:hover .dc-svg,
@@ -123,10 +131,13 @@ body {
 }
 
 .sandmod-link-sidebar.links {
+     display: flex;
+     align-items: center;
+     justify-content: center;
      background-color: var(--main-color_3);
-     border-radius: 5px;
      padding: 10px;
      margin: 10px;
+     border-radius: 25px;
 }
 
 .sandmod-link-sidebar.links:hover {
@@ -188,7 +199,6 @@ body {
 .sandmod-sidebar-tools-list {
      display: none;
      list-style: none;
-     border-left: 1px solid var(--grey-color);
      margin-left: 20px;
      padding-left: 0px;
 }
@@ -200,7 +210,6 @@ body {
      color: rgba(235, 235, 245, .6);
      text-decoration: none;
      padding: 5px;
-     margin: 5px;
      font-weight: bold;
      font-size: 13px;
      transition: 0.2s ease-in-out;
@@ -259,10 +268,23 @@ body {
      width: 100%;
      height: 90px;
      margin: 0px;
+     border: none;
+     border-bottom: 1px solid #2e2e32;
+     border-left: 1px solid #2e2e32;
+     border-right: 1px solid #2e2e32;
+}
+
+.sandmod-forum-tutorial:first-child {
+  border-top: 1px solid #2e2e32;
+}
+
+.sandmod-forum-tutorial:has(+ .sandmod-forum-tutorial:hover) {
+  border-bottom-color: var(--main-color_1);
 }
 
 .sandmod-forum-tutorial:hover {
      border-color: var(--main-color_1);
+     background-color: rgba(92, 115, 231, 0.1);
 }
 
 .sandmod-tutorial-header {
