@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const reader = new FileReader();
         reader.onload = (e) => {
             const img = document.createElement('img');
-            img.src = '../' + e.target.result;
+            img.src = e.target.result;
             img.alt = 'Tutorial Image';
             img.className = 'sandmod-tutorial-image';
             img.dataset.fileName = fileName;
@@ -316,7 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cleanCanvas.querySelectorAll('.sandmod-tutorial-image').forEach(img => {
             const fileName = img.dataset.fileName;
             if (fileName) {
-                img.src = `./assets/${fileName}`;
+                img.src = `../assets/${fileName}`;
                 img.removeAttribute('data-file-name');
             }
         });
