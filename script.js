@@ -88,6 +88,16 @@ const tutorialsData = [
         tutorialLink: "./tutorials/10288.html",
         assetDownloadLink: null, assetType: null, asset3DModel: null, assetPackage: null
     },
+        {
+        id: "tut002",
+        videoTitle: "Ketchup on Pizza",
+        authorName: "TSUKIN",
+        authorPfpSrc: "./assets/0743c1ae68cda7aeccced6a831294e11.png",
+        type1: "Tutorial",
+        type2: "Text",
+        tutorialLink: "./tutorials/10289.html",
+        assetDownloadLink: null, assetType: null, asset3DModel: null, assetPackage: null
+    }
 ];
 
 // =====================
