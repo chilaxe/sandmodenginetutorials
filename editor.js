@@ -189,7 +189,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function processImageFile(file, wrapperElement) {
-        const fileName = `${title}${++imageCounter}.${file.name.split('.').pop()}`;
+        let safeTitle = tutorialNameInput.value.trim().replace(/\s+/g, '_') || 'image';
+        const fileName = `${safeTitle}_${++imageCounter}.${file.name.split('.').pop()}`;
+
         imageFiles.set(fileName, file);
 
         const reader = new FileReader();
