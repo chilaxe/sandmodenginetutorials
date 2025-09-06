@@ -82,20 +82,20 @@ const tutorialsData = [
         id: "tut001",
         videoTitle: "Step-by-Step Guide to Creating a Multiplayer Chat System",
         authorName: "Chilaxe",
-        authorPfpSrc: "assets/Untitled-1.png",
+        authorPfpSrc: "./assets/Untitled-1.png",
         type1: "Tutorial",
         type2: "Text",
-        tutorialLink: "tutorials/10288.html",
+        tutorialLink: "./tutorials/10288.html",
         assetDownloadLink: null, assetType: null, asset3DModel: null, assetPackage: null
     },
         {
         id: "tut002",
         videoTitle: "Ketchup on Pizza",
         authorName: "TSUKIN",
-        authorPfpSrc: "assets/0743c1ae68cda7aeccced6a831294e11.png",
+        authorPfpSrc: "./assets/0743c1ae68cda7aeccced6a831294e11.png",
         type1: "Tutorial",
         type2: "Text",
-        tutorialLink: "tutorials/ketchuponpizza.html",
+        tutorialLink: "./tutorials/ketchuponpizza.html",
         assetDownloadLink: null, assetType: null, asset3DModel: null, assetPackage: null
     }
 ];
