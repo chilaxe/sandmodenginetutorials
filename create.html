@@ -4,84 +4,52 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-    
     <title>SandModTutorials - Create</title>
-    
     <meta name="description" content="Discover comprehensive tutorials and tools for SandMod. Learn, create, and share with the SandMod community." />
     <meta name="keywords" content="SandMod, tutorials, creator center, blockman, modding, gaming tutorials, sandbox modding" />
     <meta name="author" content="Chilaxe" />
-    
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/logo_sandmod_original.svg" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-    
-    <link rel="stylesheet" href="/sandmodenginetutorials/style.css" />
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
-    <script src="/sandmodenginetutorials/script.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="tutorials/tutorialpage.css" />
+    <link rel="stylesheet" href="editor.css" />
+
 </head>
 <body>
     <div class="sandmod-maincontent">
         <div class="sandmod-tutorials">
-            <header class="sandmod-header-container ">
+            <header class="sandmod-header-container">
                 <div class="path">
-                    <span>
-                        SandMod/Create/
-                    </span>
+                    <span>SandMod/Create/</span>
                 </div>
-                <div class="filter">
-                    <button class="sandmod-tutorial-filter-btn filter-btn" title="filter">
-                        <span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e3e3e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-funnel-icon lucide-funnel"><path d="M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z"/></svg>
-                        </span>
-                    </button>
-                    <div class="filter-area" id="tutorial-filters">
-                        <button class="sandmod-tutorial-filter-btn active" data-filter-type="tutorial" data-value="all" title="Show All Tutorials">All</button>
-                        <button class="sandmod-tutorial-filter-btn" data-filter-type="tutorial" data-value="Text" title="Filter Text Tutorials">
-                            <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-type"><path d="M12 4v16"/><path d="M4 7V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2"/><path d="M9 20h6"/></svg>
-                            </span>
-                        </button>
-                        <button class="sandmod-tutorial-filter-btn" data-filter-type="tutorial" data-value="Video" title="Filter Video Tutorials">
-                            <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clapperboard"><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"/><path d="m6.2 5.3 3.1 3.9"/><path d="m12.4 3.4 3.1 4"/><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>
-                            </span>
-                        </button>
+                 </header>
+
+            <div id="tutorial-editor-container">
+                <div id="editor-controls">
+                    <input type="text" id="tutorialName" placeholder="Enter Tutorial Name..." class="control-input">
+                    <button id="addSubHeader" class="control-btn">Add SubHeader</button>
+                    <button id="addParagraph" class="control-btn">Add Paragraph</button>
+                    <button id="addLink" class="control-btn">Add Link to Text</button>
+                    <button id="addImage" class="control-btn">Add Image</button>
+                    <button id="addYoutube" class="control-btn">Add YouTube Video</button>
+                    <button id="exportZip" class="control-btn export-btn">Export as .zip</button>
+                </div>
+
+                <div id="canvas" class="sandmod-tutorial-content">
+                    <div class="header-title">
+                        <h1 id="canvas-title" class="sandmod-tutorial-title">Tutorial Title</h1>
                     </div>
-                </div>
-                <div class="sandmod-search">
-                    <form class="sandmod-search-form"> 
-                        <button type="submit" class="sandmod-search-button" aria-label="Search Tutorials">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e3e3e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search-icon lucide-search"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
-                        </button>
-                        <div class="separator"></div>
-                        <input type="text" class="sandmod-search-input" id="tutorial-search-input" placeholder="Search Tutorials..." name="tutorial_search" aria-label="Search Tutorials">
-                    </form>
-                </div>
-            </header>
-            <div class="container">
-                <div class="icon-main-container">
-                    <svg style="animation: spin 8s linear infinite;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cog-icon lucide-cog"><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"/><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M12 2v2"/><path d="M12 22v-2"/><path d="m17 20.66-1-1.73"/><path d="M11 10.27 7 3.34"/><path d="m20.66 17-1.73-1"/><path d="m3.34 7 1.73 1"/><path d="M14 12h8"/><path d="M2 12h2"/><path d="m20.66 7-1.73 1"/><path d="m3.34 17 1.73-1"/><path d="m17 3.34-1 1.73"/><path d="m11 13.73-4 6.93"/></svg>
-                </div>
-                <div class="subheading-container">
-                    <h2 class="subheading">Under Development</h2>
-                    <p class="description">This section is still a work in progress. Please check back soon to see what's new!</p>
-                </div>
-                <div class="button-container">
-                    <a href="/" class="home-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="19" y1="12" x2="5" y2="12"></line>
-                            <polyline points="12 19 5 12 12 5"></polyline>
-                        </svg>
-                        Go Home
-                    </a>
+                    <div id="content-area" class="tutorial-content-main">
+                        </div>
                 </div>
             </div>
-        </div>
+            </div>
     </div>
+
     <div class="sandmod-sidebar">
-        <header class="sandmod-header">
+              <header class="sandmod-header">
             <div class="sandmod-logo">
                 <img src="/sandmodenginetutorials/assets/logo_sandmod.svg" alt="SandMod Logo" class="sandmod-logo-icon">
             </div>
@@ -104,7 +72,7 @@
                         Assets
                     </span>
                 </a></li>
-                    <li><a href="./" class="sandmod-link-sidebar" target="_self" title="BlockMan Creator Center">
+                    <li><a href="/sandmodenginetutorials/" class="sandmod-link-sidebar last" target="_self" title="BlockMan Creator Center">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e3e3e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-cog-icon lucide-user-cog"><path d="M10 15H6a4 4 0 0 0-4 4v2"/><path d="m14.305 16.53.923-.382"/><path d="m15.228 13.852-.923-.383"/><path d="m16.852 12.228-.383-.923"/><path d="m16.852 17.772-.383.924"/><path d="m19.148 12.228.383-.923"/><path d="m19.53 18.696-.382-.924"/><path d="m20.772 13.852.924-.383"/><path d="m20.772 16.148.924.383"/><circle cx="18" cy="15" r="3"/><circle cx="9" cy="7" r="4"/></svg>
                     </span>
@@ -125,7 +93,7 @@
                             <svg class="sandmod-sidebar-tool-btn-arrow-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
                         </span>
                     </button>
-                    <ul class="sandmod-sidebar-tools-list" style="display: block;">
+                    <ul class="sandmod-sidebar-tools-list">
                         <li><a href="/sandmodenginetutorials/themes.html" class="sandmod-sidebar-tool" title="themes">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e3e3e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-swatch-book-icon lucide-swatch-book"><path d="M11 17a4 4 0 0 1-8 0V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2Z"/><path d="M16.7 13H19a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H7"/><path d="M 7 17h.01"/><path d="m11 8 2.3-2.3a2.4 2.4 0 0 1 3.404.004L18.6 7.6a2.4 2.4 0 0 1 .026 3.434L9.9 19.8"/></svg>
@@ -191,15 +159,22 @@
                 </a></li>
             </div>
         </div>
-        <footer>
-            <div class="credits">
+    <footer>
+          <div class="credits">
                 <span>
-                    <p class="credits-text">
-                        Made By <span class="credits-text-highlight">Chilaxe</span>
-                    </p>
-                </span>
-            </div>
-        </footer>
-    </div>
+                  <p class="credits-text">
+                      Made By <span class="credits-text-highlight">Chilaxe</span>
+                  </p>
+              </span>
+          </div>
+      </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+
+    <script src="editor.js"></script>
+    <script src="script.js"></script>
+
 </body>
 </html>

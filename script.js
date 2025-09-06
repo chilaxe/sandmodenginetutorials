@@ -641,13 +641,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         toggleBtn.addEventListener('click', () => {
-            const isOpen = getComputedStyle(toolsContainer).display === 'block';
-            toolsContainer.style.display = isOpen ? 'none' : 'block';
-            if (arrowSvg) {
-                arrowSvg.innerHTML = isOpen
-                    ? '<path d="m6 9 6 6 6-6"/>' // Arrow down
-                    : '<path d="m18 15-6-6-6 6"/>'; // Arrow up
-            }
+          const isOpen = toolsContainer.classList.toggle('open');
+          const path = arrowSvg.querySelector('path');
+        
+          if (path) {
+            path.setAttribute('d', isOpen 
+              ? 'm18 15-6-6-6 6'   // Arrow up
+              : 'm6 9 6 6 6-6');  // Arrow down
+          }
         });
     }
 });

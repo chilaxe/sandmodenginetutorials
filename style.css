@@ -80,10 +80,11 @@ body {
      background-color: none;
      color: rgba(235, 235, 245, .6);
      text-decoration: none;
-     padding: 5px;
+     padding: 10px;
      margin: 5px;
      height: 24px;
      font-size: 12px;
+     border-radius: 0px;
      font-weight: bold;
      transition: 0.2s ease-in-out;
 }
@@ -158,8 +159,9 @@ body {
      border: none;
      color: rgba(235, 235, 245, .6);
      text-decoration: none;
-     padding: 5px;
+     padding: 10px;
      margin: 5px;
+     width: 190px;
      font-weight: bold;
      font-size: 13px;
      transition: 0.2s ease-in-out;
@@ -175,7 +177,7 @@ body {
 
 .sandmod-sidebar-tool-btn-arrow-icon {
      position: absolute;
-     right: -128px;
+     right: 0px;
      top: 50%;
      width: 18px;
      height: 18px;
@@ -197,11 +199,21 @@ body {
 }
 
 .sandmod-sidebar-tools-list {
-     display: none;
-     list-style: none;
-     margin-left: 20px;
-     padding-left: 0px;
+  list-style: none;
+  margin-left: 20px;
+  padding-left: 0px;
+
+  max-height: 0;   
+  opacity: 0;      
+  overflow: hidden;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
 }
+
+.sandmod-sidebar-tools-list.open {
+  max-height: 500px;
+  opacity: 1;
+}
+
 
 .sandmod-sidebar-tool {
      display: flex;
@@ -612,12 +624,12 @@ body {
      color: rgba(235, 235, 245, .6);
      font-size: 13px;
      padding: 5px;
-     width: 200px;
+     width: 300px;
      height: 24px;
      outline: none;
      transition: border-color 0.2s ease-in-out;
      border: 1px solid var(--grey-color);
-     border-radius: 0px 5px 5px 0px;
+     border-radius: 0px 24px 24px 0px;
      border-left: none;
 }
 
@@ -639,7 +651,7 @@ body {
      width: 36px;
      height: 36px;
      transition: 0.2s ease-in-out;
-     border-radius: 5px 0px 0px 5px;
+     border-radius: 24px 0px 0px 24px;
      border: 1px solid var(--grey-color);
      border-right: none;
      cursor: pointer;
