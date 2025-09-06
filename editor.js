@@ -188,29 +188,38 @@ document.addEventListener('DOMContentLoaded', () => {
         contentArea.appendChild(wrapper);
     }
 
-    function processImageFile(file, wrapperElement) {
-        let safeTitle = tutorialNameInput.value.trim().replace(/\s+/g, '_') || 'image';
-        const fileName = `${safeTitle}_${++imageCounter}.${file.name.split('.').pop()}`;
+function processImageFile(file, wrapperElement) {
+    // Get the base name without extension
+    let baseName = file.name.split('.').slice(0, -1).join('.') || 'image';
+    let ext = file.name.split('.').pop();
 
-        imageFiles.set(fileName, file);
+    // Generate a random number (you can control digits)
+    let randomNum = Math.floor(Math.random() * 100000);
 
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const img = document.createElement('img');
-            img.src = e.target.result;
-            img.alt = 'Tutorial Image';
-            img.className = 'sandmod-tutorial-image';
-            img.dataset.fileName = fileName;
+    // Build final file name
+    const fileName = `${baseName}_${randomNum}.${ext}`;
 
-            const contentSpan = document.createElement('span');
-            contentSpan.appendChild(img);
+    imageFiles.set(fileName, file);
 
-            wrapperElement.innerHTML = '';
-            wrapperElement.appendChild(contentSpan);
-            addControls(wrapperElement);
-        };
-        reader.readAsDataURL(file);
-    }
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.alt = 'Tutorial Image';
+        img.className = 'sandmod-tutorial-image';
+        img.dataset.fileName = fileName;
+
+        const contentSpan = document.createElement('span');
+        contentSpan.appendChild(img);
+
+        // Replace the "drop zone" with the actual image
+        wrapperElement.innerHTML = '';
+        wrapperElement.appendChild(contentSpan);
+        addControls(wrapperElement); // Re-add the delete/drag controls
+    };
+    reader.readAsDataURL(file);
+}
+
 
     // --- LINK HANDLING ---
   function addLinkToParagraph() {
