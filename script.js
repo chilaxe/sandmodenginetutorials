@@ -95,7 +95,7 @@ const tutorialsData = [
         authorPfpSrc: "./assets/0743c1ae68cda7aeccced6a831294e11.png",
         type1: "Tutorial",
         type2: "Text",
-        tutorialLink: "./tutorials/10289.html",
+        tutorialLink: "./tutorials/ketchup on pizza.html",
         assetDownloadLink: null, assetType: null, asset3DModel: null, assetPackage: null
     }
 ];
