@@ -189,13 +189,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function processImageFile(file, wrapperElement) {
-        const fileName = `image_${++imageCounter}.${file.name.split('.').pop()}`;
+        const fileName = `${title}${++imageCounter}.${file.name.split('.').pop()}`;
         imageFiles.set(fileName, file);
 
         const reader = new FileReader();
         reader.onload = (e) => {
             const img = document.createElement('img');
-            img.src = e.target.result;
+            img.src = '../' + e.target.result;
             img.alt = 'Tutorial Image';
             img.className = 'sandmod-tutorial-image';
             img.dataset.fileName = fileName;
