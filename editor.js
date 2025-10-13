@@ -1,3 +1,8 @@
+window.addEventListener('beforeunload', function (e) {
+    e.preventDefault();
+    e.returnValue = 'Are you sure you want to leave? You have unsaved changes.';
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     const tutorialNameInput = document.getElementById('tutorialName');
     const canvasTitle = document.getElementById('canvas-title');
