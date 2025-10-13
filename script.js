@@ -78,7 +78,16 @@ const svgs = {
 */
 
 const tutorialsData = [
-
+    {
+        id: "tut001",
+        videoTitle: "Beginner’s Guide to Using Sandmod Engine",
+        authorName: "Chilaxe",
+        authorPfpSrc: "./assets/Untitled-1.png",
+        type1: "Tutorial",
+        type2: "Text",
+        tutorialLink: "./1001.html",
+        assetDownloadLink: null, assetType: null, asset3DModel: null, assetPackage: null
+    }
 ];
 
 // =====================
