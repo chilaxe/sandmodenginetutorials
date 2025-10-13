@@ -65,7 +65,7 @@ body {
      border-right: 1px solid var(--grey-color);
      padding: 10px 20px;
      background-color: var(--black-color);
-     z-index: 10;
+     z-index: -1;
 }
 
 .sandmod-links-list {
