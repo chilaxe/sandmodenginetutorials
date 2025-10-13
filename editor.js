@@ -1,5 +1,4 @@
 window.addEventListener('beforeunload', function (e) {
-    e.preventDefault();
     e.returnValue = 'Are you sure you want to leave? You have unsaved changes.';
 });
 
