@@ -116,6 +116,7 @@
     height: 400px;
     margin-left: 20px;
     background: var(--black-color);
+     background-size: contain;
     overflow: hidden;
     margin-top: 10px;
 }
