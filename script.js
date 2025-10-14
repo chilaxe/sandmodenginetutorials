@@ -87,6 +87,16 @@ const tutorialsData = [
         type2: "Text",
         tutorialLink: "./tutorials/1001.html",
         assetDownloadLink: null, assetType: null, asset3DModel: null, assetPackage: null
+    },
+    {
+        id: "tut002",
+        videoTitle: "How to Build Level, Energy, and Health Systems for Your Game in SandMod Engine",
+        authorName: "Chilaxe",
+        authorPfpSrc: "./assets/Untitled-1.png",
+        type1: "Tutorial",
+        type2: "Text",
+        tutorialLink: "./tutorials/1002.html",
+        assetDownloadLink: null, assetType: null, asset3DModel: null, assetPackage: null
     }
 ];
 
