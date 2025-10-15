@@ -982,3 +982,29 @@ body {
     }
 }
 
+.notice {
+     border: 1px solid #2e2e32;
+     padding: 5px;
+}
+
+.notice p {
+     margin: 0px;
+     padding: 0px;
+}
+
+.notice strong {
+     font-size: 12px;
+     color: #6a7fe6;
+     padding-bottom: 5px;
+}
+
+.noticetxt {
+     font-size: 12px;
+     color: #9ca3af;
+}
+
+.mailtxt {
+     text-decoration: none;
+     color: #8A91FF;
+     font-size: 9.5px;
+}
