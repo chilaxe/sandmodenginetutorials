@@ -100,6 +100,20 @@ const tutorialsData = [
     }
 ];
 
+// note 
+/*
+    {
+        id: "tut003",
+        videoTitle: "How to Build Level, Energy, and Health Systems for Your Game in SandMod Engine",
+        authorName: "BGTalk",
+        authorPfpSrc: "./assets/da3c790b6b1c054791a551657cc84fff.png",
+        type1: "Tutorial",
+        type2: "Text",
+        tutorialLink: "./tutorials/1002.html",
+        assetDownloadLink: null, assetType: null, asset3DModel: null, assetPackage: null
+    }
+*/
+
 // =====================
 // Bookmark Utilities
 // =====================
@@ -535,6 +549,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     (item.authorName && item.authorName.toLowerCase().includes(query))
                 );
             }
+
+            filtered.reverse();
             renderFilteredItems(filtered, query, 'tutorials', 'tutorials-container');
         }
 
