@@ -116,7 +116,7 @@ const tutorialsData = [
         type1: "Asset",
         type2: null,
         assetPreviewImageSrc: null,
-        assetModelSrc: "boyglb.glb",
+        assetModelSrc: "./assets/boyglb.glb",
         assetDescription: "The Default Boy Model of Blockman Go.",
         tutorialLink: null,
         assetDownloadLink: "./assets/boy.FBX",
