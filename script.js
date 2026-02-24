@@ -97,6 +97,16 @@ const tutorialsData = [
         type2: "Text",
         tutorialLink: "./tutorials/1002.html",
         assetDownloadLink: null, assetType: null, asset3DModel: null, assetPackage: null
+    },
+    {
+        id: "tut003",
+        videoTitle: "How to Create Voxel Maps for Sandmod Engine",
+        authorName: "Chilaxe",
+        authorPfpSrc: "./assets/Untitled-1.png",
+        type1: "Tutorial",
+        type2: "Text",
+        tutorialLink: "./tutorials/1003.html",
+        assetDownloadLink: null, assetType: null, asset3DModel: null, assetPackage: null
     }
 ];
 
