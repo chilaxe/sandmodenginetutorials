@@ -273,9 +273,9 @@
     align-items: center;
     background-color: #ffcc009c;
     color: #333;
-    padding: 10px;
+    padding: 5px;
     border: 1px solid #ff9900;
-    margin-top: 20px;
+    margin: 20px;
 }
 
 .notice-sign-warning svg {
