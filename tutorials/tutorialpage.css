@@ -282,22 +282,24 @@
     width: 24px;
     height: 24px;
     margin-right: 10px;
-    stroke: rgba(255, 255, 245, .86);
+     color: rgba(250, 250, 250, 0.75);
 }
 
 .notice-content {
     font-size: 16px;
-     color: rgba(235, 235, 245, .6);
+     color: rgba(250, 250, 250, 0.85);
 }
 
 .notice-title {
+    display: flex;
+    justify-content: center;
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 5px;
-     color: rgba(235, 235, 245, .6);
+     color: rgba(250, 250, 250, 0.85);
 }
 
 .notice-text {
     font-size: 16px;
-     color: rgba(235, 235, 245, .6);
+     color: rgba(250, 250, 250, 0.85);
 }
