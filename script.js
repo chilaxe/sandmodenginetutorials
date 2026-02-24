@@ -107,7 +107,25 @@ const tutorialsData = [
         type2: "Text",
         tutorialLink: "./tutorials/1003.html",
         assetDownloadLink: null, assetType: null, asset3DModel: null, assetPackage: null
-    }
+    },
+    {
+        id: "ast001",
+        videoTitle: "Boy Model",
+        authorName: "Chilaxe",
+        authorPfpSrc: "./assets/Untitled-1.png",
+        type1: "Asset",
+        type2: null,
+        assetPreviewImageSrc: null,
+        assetModelSrc: "boyglb.glb",
+        assetDescription: "The Default Boy Model of Blockman Go.",
+        tutorialLink: null,
+        assetDownloadLink: "./assets/boy.FBX",
+        assetType: "Model",
+        asset3DModel: "Boy Character",
+        assetPackage: null,
+        tutorialVideoUrl: null,
+        tutorialTextContent: null
+    },
 ];
 
 // note 
