@@ -271,10 +271,10 @@
 .notice-sign-warning {
     display: flex;
     align-items: center;
-    background-color: #ffcc00;
+    background-color: #ffcc009c;
     color: #333;
     padding: 10px;
-    border-radius: 5px;
+    border: 1px solid #ff9900;
     margin-top: 20px;
 }
 
