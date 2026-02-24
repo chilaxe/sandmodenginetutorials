@@ -120,7 +120,7 @@ const tutorialsData = [
         assetDescription: "The Default Boy Model of Blockman Go.",
         tutorialLink: null,
         assetDownloadLink: "./assets/boy.FBX",
-        assetType: "Model",
+        assetType: "3D",
         asset3DModel: "Boy Character",
         assetPackage: null,
         tutorialVideoUrl: null,
