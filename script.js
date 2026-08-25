@@ -1,4 +1,89 @@
 // =====================
+// Toast Notification Utility
+// =====================
+function showSandModToast(message, type = 'info') {
+    let container = document.querySelector('.sandmod-toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.className = 'sandmod-toast-container';
+        document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    toast.className = `sandmod-toast sandmod-toast-${type}`;
+    
+    const iconName = type === 'success' ? 'check' : (type === 'error' ? 'priority_high' : 'info');
+
+    toast.innerHTML = `
+        <span class="material-symbols-sharp sandmod-toast-icon">${iconName}</span>
+        <span class="sandmod-toast-msg">${message}</span>
+    `;
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add('hiding');
+        setTimeout(() => toast.remove(), 260);
+    }, 3000);
+}
+
+// =====================
+// Confirmation Modal Utility
+// =====================
+function showSandModConfirm(message, onConfirm, onCancel, title = 'Confirmation') {
+    let modal = document.querySelector('.sandmod-confirm-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.className = 'sandmod-confirm-modal';
+        modal.innerHTML = `
+            <div class="sandmod-confirm-dialog">
+                <h3 class="sandmod-confirm-title"></h3>
+                <p class="sandmod-confirm-msg"></p>
+                <div class="sandmod-confirm-actions">
+                    <button class="sandmod-btn-cancel">Cancel</button>
+                    <button class="sandmod-btn-confirm">Confirm</button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    }
+
+    const titleEl = modal.querySelector('.sandmod-confirm-title');
+    const msgEl = modal.querySelector('.sandmod-confirm-msg');
+    const cancelBtn = modal.querySelector('.sandmod-btn-cancel');
+    const confirmBtn = modal.querySelector('.sandmod-btn-confirm');
+
+    titleEl.textContent = title;
+    msgEl.textContent = message;
+
+    const closeModal = () => {
+        modal.classList.remove('open');
+        cancelBtn.onclick = null;
+        confirmBtn.onclick = null;
+        modal.onclick = null;
+    };
+
+    cancelBtn.onclick = () => {
+        closeModal();
+        if (typeof onCancel === 'function') onCancel();
+    };
+
+    confirmBtn.onclick = () => {
+        closeModal();
+        if (typeof onConfirm === 'function') onConfirm();
+    };
+
+    modal.onclick = (e) => {
+        if (e.target === modal) {
+            closeModal();
+            if (typeof onCancel === 'function') onCancel();
+        }
+    };
+
+    modal.classList.add('open');
+}
+
+// =====================
 // Constants & Data
 // =====================
 
@@ -7,15 +92,15 @@ const ASSET_BOOKMARKS_KEY = 'sandmodBookmarkedAssets';
 const BOOKMARKS_STORAGE_KEY = 'sandmodBookmarkedItems';
 
 const svgs = {
-    bookIcon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e3e3e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-icon lucide-book"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg>`,
-    packageIcon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-package-icon lucide-package"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></svg>`,
-    notebookIcon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clapperboard-icon lucide-clapperboard"><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"/><path d="m6.2 5.3 3.1 3.9"/><path d="m12.4 3.4 3.1 4"/><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>`,
-    fileTextIcon: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-notebook-icon lucide-notebook"><path d="M2 6h4"/><path d="M2 10h4"/><path d="M2 14h4"/><path d="M2 18h4"/><rect width="16" height="20" x="4" y="2" rx="2"/><path d="M16 2v20"/></svg>`,
-    bookmarkDefault: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bookmark-icon lucide-bookmark"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>`,
-    bookmarkFilled: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bookmark-check-icon lucide-bookmark-check"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2Z"/><path d="m9 10 2 2 4-4"/></svg>`,
-    share: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-share2-icon lucide-share-2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>`,
-    asset3DIcon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-box-icon lucide-box"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>`,
-    assetPackageIcon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder-archive-icon lucide-folder-archive"><circle cx="15" cy="19" r="2"/><path d="M20.9 19.8A2 2 0 0 0 22 18V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h5.1"/><path d="M15 11v-1"/><path d="M15 17v-2"/></svg>`
+    bookIcon: `<span class="material-symbols-sharp">menu_book</span>`,
+    packageIcon: `<span class="material-symbols-sharp">inventory_2</span>`,
+    notebookIcon: `<span class="material-symbols-sharp">smart_display</span>`,
+    fileTextIcon: `<span class="material-symbols-sharp">article</span>`,
+    bookmarkDefault: `<span class="material-symbols-sharp">bookmark</span>`,
+    bookmarkFilled: `<span class="material-symbols-sharp" style="font-variation-settings: 'FILL' 1;">bookmark</span>`,
+    share: `<span class="material-symbols-sharp">share</span>`,
+    asset3DIcon: `<span class="material-symbols-sharp">deployed_code</span>`,
+    assetPackageIcon: `<span class="material-symbols-sharp">folder_zip</span>`
 };
 
 /* reminder :
@@ -200,55 +285,50 @@ function createTutorialCard(itemData) {
     cardElement.className = 'sandmod-forum-tutorial';
     cardElement.dataset.itemId = itemData.id;
 
-    // Header
-    const header = document.createElement('header');
-    header.className = 'sandmod-tutorial-header';
+    cardElement.addEventListener('click', (e) => {
+        if (e.target.closest('button, a')) {
+            return;
+        }
+        const targetUrl = itemData.type1 === "Asset" ? (itemData.assetDownloadLink || '#asset-details') : (itemData.tutorialLink || '#');
+        if (targetUrl && targetUrl !== '#' && targetUrl !== '#asset-details') {
+            window.location.href = targetUrl;
+        }
+    });
 
-    // Main Icon
-    const tutorialIco = document.createElement('div');
+    const cardHeader = document.createElement('div');
+    cardHeader.className = 'sandmod-tutorial-card-header';
+
+    const cardTitleGroup = document.createElement('div');
+    cardTitleGroup.className = 'sandmod-tutorial-title-group';
+
+    const tutorialIco = document.createElement('span');
     tutorialIco.className = 'tutorial-ico';
-    const mainIconSpan = document.createElement('span');
-    if (itemData.type1 === "Tutorial") {
-        mainIconSpan.innerHTML = svgs.bookIcon;
-    } else if (itemData.type1 === "Asset") {
-        mainIconSpan.innerHTML = svgs.packageIcon;
-    } else {
-        mainIconSpan.innerHTML = svgs.bookIcon;
-    }
-    tutorialIco.appendChild(mainIconSpan);
+    tutorialIco.innerHTML = itemData.type1 === "Asset" ? svgs.packageIcon : svgs.bookIcon;
+    cardTitleGroup.appendChild(tutorialIco);
 
-    // Type Icon (Only for Tutorials with type2)
-    const tutorialTypeContainer = document.createElement('div');
-    tutorialTypeContainer.className = 'tutorial-type';
+    const tutorialTitle = document.createElement('h3');
+    tutorialTitle.className = 'tutorial-title';
+    tutorialTitle.textContent = itemData.videoTitle;
+    cardTitleGroup.appendChild(tutorialTitle);
+
+    cardHeader.appendChild(cardTitleGroup);
+
     if (itemData.type1 === "Tutorial" && itemData.type2) {
-        const type1Div = document.createElement('div');
-        type1Div.className = 'type-1';
-        const type1IconSpan = document.createElement('span');
-        if (itemData.type2 === "Video") {
-            type1IconSpan.innerHTML = svgs.notebookIcon;
-        } else if (itemData.type2 === "Text") {
-            type1IconSpan.innerHTML = svgs.fileTextIcon;
-        }
-        if (type1IconSpan.innerHTML) {
-            type1Div.appendChild(type1IconSpan);
-            tutorialTypeContainer.appendChild(type1Div);
-        }
+        const typeBadge = document.createElement('div');
+        typeBadge.className = 'sandmod-tutorial-type-badge';
+        const typeIcon = itemData.type2 === "Video" ? svgs.notebookIcon : svgs.fileTextIcon;
+        typeBadge.innerHTML = `${typeIcon}<span>${itemData.type2}</span>`;
+        cardHeader.appendChild(typeBadge);
     }
+    cardElement.appendChild(cardHeader);
 
-    header.appendChild(tutorialIco);
-    header.appendChild(tutorialTypeContainer);
+    const cardFooter = document.createElement('div');
+    cardFooter.className = 'sandmod-tutorial-card-footer';
 
-    // Main Content
-    const mainContent = document.createElement('div');
-    mainContent.className = 'tutorial-maincontent';
-
-    // Credits
-    const tutorialCredits = document.createElement('div');
-    tutorialCredits.className = 'tutorial-credits';
     const creditPfpDiv = document.createElement('div');
     creditPfpDiv.className = 'tutorial-credit-pfp';
     const pfpImg = document.createElement('img');
-    pfpImg.src = itemData.authorPfpSrc;
+    pfpImg.src = itemData.authorPfpSrc || './assets/default_pfp.png';
     pfpImg.alt = `${itemData.authorName} profile picture`;
     pfpImg.className = 'tutorial-credit-pfp-img';
     const pfNameSpan = document.createElement('span');
@@ -257,11 +337,9 @@ function createTutorialCard(itemData) {
     creditPfpDiv.appendChild(pfpImg);
     creditPfpDiv.appendChild(pfNameSpan);
 
-    // Tools (Bookmark & Share)
     const toolsTutorial = document.createElement('div');
     toolsTutorial.className = 'tools-tutorial';
 
-    // Bookmark Button
     const bookmarkButton = document.createElement('button');
     bookmarkButton.className = 'sandmod-tutorial-tools-btn';
     const bookmarkIconSpan = document.createElement('span');
@@ -284,7 +362,6 @@ function createTutorialCard(itemData) {
     });
     bookmarkButton.appendChild(bookmarkIconSpan);
 
-    // Share Button
     const shareButton = document.createElement('button');
     shareButton.className = 'sandmod-tutorial-tools-btn';
     shareButton.title = 'Share';
@@ -293,39 +370,30 @@ function createTutorialCard(itemData) {
     shareButton.appendChild(shareIconSpan);
     shareButton.addEventListener('click', (e) => {
         e.stopPropagation();
-        const shareURL = itemData.type1 === "Asset" ? (itemData.assetDownloadLink || window.location.href) : (itemData.tutorialLink || window.location.href);
+        const shareURL = itemData.tutorialLink || window.location.href;
         if (navigator.share) {
             navigator.share({
                 title: itemData.videoTitle,
                 text: `Check out: ${itemData.videoTitle} by ${itemData.authorName}`,
                 url: shareURL,
             }).catch(error => console.log('Error sharing:', error));
+        } else if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(shareURL).then(() => {
+                showSandModToast('Link copied to clipboard!', 'success');
+            }).catch(() => {
+                showSandModToast(`Share link: ${shareURL}`, 'info');
+            });
         } else {
-            prompt("Copy link:", shareURL);
+            showSandModToast(`Share link: ${shareURL}`, 'info');
         }
     });
 
     toolsTutorial.appendChild(bookmarkButton);
     toolsTutorial.appendChild(shareButton);
-    tutorialCredits.appendChild(creditPfpDiv);
-    tutorialCredits.appendChild(toolsTutorial);
 
-    // Title
-    const tutorialTitleDiv = document.createElement('div');
-    tutorialTitleDiv.className = 'tutorial-title';
-    const titleLink = document.createElement('a');
-    titleLink.href = itemData.type1 === "Asset" ? (itemData.assetDownloadLink || '#asset-details') : (itemData.tutorialLink || '#');
-    titleLink.textContent = itemData.videoTitle;
-    titleLink.className = 'tutorial-title';
-    titleLink.rel = "noopener noreferrer";
-    titleLink.style.textDecoration = 'none';
-    tutorialTitleDiv.appendChild(titleLink);
-
-    mainContent.appendChild(tutorialTitleDiv);
-    mainContent.appendChild(tutorialCredits);
-
-    cardElement.appendChild(header);
-    cardElement.appendChild(mainContent);
+    cardFooter.appendChild(creditPfpDiv);
+    cardFooter.appendChild(toolsTutorial);
+    cardElement.appendChild(cardFooter);
 
     return cardElement;
 }
@@ -337,39 +405,34 @@ function createAssetCard(itemData) {
     cardElement.dataset.assetType = itemData.assetType;
 
     cardElement.addEventListener('click', (event) => {
-        // This check prevents the overlay from opening if a button or link inside the card was the click target
         if (event.target.closest('button, a')) {
             return;
         }
-        // If the click was on the card itself, show the details
         createAndShowAssetDetailOverlay(itemData);
     });
 
-    // Header
     const header = document.createElement('header');
     header.className = 'sandmod-asset-header';
-    const assetTypeDiv = document.createElement('div');
-    assetTypeDiv.className = 'sandmod-asset-type';
 
     const typeIconSpan = document.createElement('span');
     typeIconSpan.className = 'sandmod-asset-type-icon';
     typeIconSpan.innerHTML = svgs.packageIcon;
-    assetTypeDiv.appendChild(typeIconSpan);
+    header.appendChild(typeIconSpan);
 
-    const type2IconSpan = document.createElement('span');
-    type2IconSpan.className = 'sandmod-asset-type-2';
-    if (itemData.assetType === '3D') {
-        type2IconSpan.innerHTML = svgs.asset3DIcon;
-    } else if (itemData.assetType === 'Package') {
-        type2IconSpan.innerHTML = svgs.assetPackageIcon;
+    if (itemData.assetType) {
+        const type2IconSpan = document.createElement('span');
+        type2IconSpan.className = 'sandmod-asset-type-2';
+        if (itemData.assetType === '3D') {
+            type2IconSpan.innerHTML = svgs.asset3DIcon;
+        } else if (itemData.assetType === 'Package') {
+            type2IconSpan.innerHTML = svgs.assetPackageIcon;
+        }
+        if (type2IconSpan.innerHTML) {
+            header.appendChild(type2IconSpan);
+        }
     }
-    if (type2IconSpan.innerHTML) {
-        assetTypeDiv.appendChild(type2IconSpan);
-    }
-    header.appendChild(assetTypeDiv);
     cardElement.appendChild(header);
 
-    // Preview Area
     const previewContainer = document.createElement('div');
     if (itemData.assetType === "3D" && itemData.assetModelSrc) {
         previewContainer.className = 'sandmod-asset-preview-3d';
@@ -401,7 +464,6 @@ function createAssetCard(itemData) {
     }
     cardElement.appendChild(previewContainer);
 
-    // Asset Info (Title)
     const assetInfoDiv = document.createElement('div');
     assetInfoDiv.className = 'sandmod-asset-info';
     const assetTitle = document.createElement('h3');
@@ -421,7 +483,6 @@ function createAssetCard(itemData) {
     assetInfoDiv.appendChild(assetTitle);
     cardElement.appendChild(assetInfoDiv);
 
-    // Credits & Tools
     const creditsAssetsDiv = document.createElement('div');
     creditsAssetsDiv.className = 'credits-assets';
 
@@ -440,7 +501,6 @@ function createAssetCard(itemData) {
     const toolsAssetsDiv = document.createElement('div');
     toolsAssetsDiv.className = 'tools-assets';
 
-    // Bookmark Button for Asset
     const bookmarkButtonAsset = document.createElement('button');
     bookmarkButtonAsset.className = 'sandmod-tool-asset';
     const bookmarkIconSpanAsset = document.createElement('span');
@@ -463,7 +523,6 @@ function createAssetCard(itemData) {
     });
     bookmarkButtonAsset.appendChild(bookmarkIconSpanAsset);
 
-    // Share Button for Asset
     const shareButtonAsset = document.createElement('button');
     shareButtonAsset.className = 'sandmod-tool-asset';
     shareButtonAsset.title = 'Share Asset';
@@ -479,8 +538,14 @@ function createAssetCard(itemData) {
                 text: `Check out this asset: ${itemData.videoTitle} by ${itemData.authorName}`,
                 url: shareURL,
             }).catch(error => console.log('Error sharing asset:', error));
+        } else if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(shareURL).then(() => {
+                showSandModToast('Asset link copied to clipboard!', 'success');
+            }).catch(() => {
+                showSandModToast(`Asset link: ${shareURL}`, 'info');
+            });
         } else {
-            prompt("Copy link to asset:", shareURL);
+            showSandModToast(`Asset link: ${shareURL}`, 'info');
         }
     });
 
@@ -496,6 +561,24 @@ function createAssetCard(itemData) {
 // =====================
 // Rendering & Filtering
 // =====================
+
+/**
+ * Filter items by author, title, or type
+ * @param {string} query Search input
+ * @param {Array} items List of items
+ * @returns {Array} Filtered list
+ */
+function searchItems(query, items) {
+    const lowerQuery = query.toLowerCase().trim();
+    if (!lowerQuery) return items;
+
+    return items.filter(item => {
+        const titleMatch = item.videoTitle && item.videoTitle.toLowerCase().includes(lowerQuery);
+        const authorMatch = item.authorName && item.authorName.toLowerCase().includes(lowerQuery);
+        const typeMatch = item.type2 && item.type2.toLowerCase().includes(lowerQuery);
+        return titleMatch || authorMatch || typeMatch;
+    });
+}
 
 function renderFilteredItems(items, query, itemTypeSingularForMessage, containerId) {
     const container = document.getElementById(containerId);
@@ -542,10 +625,79 @@ function setActiveButton(buttons, activeValue) {
 }
 
 // =====================
+// Mobile Sidebar Navigation
+// =====================
+function initMobileNavigation() {
+    const sidebar = document.querySelector('.sandmod-sidebar');
+    const header = document.querySelector('.sandmod-header-container');
+
+    if (!sidebar || !header) return;
+
+    // Create mobile menu toggle button in header if not already present
+    let toggleBtn = header.querySelector('.mobile-sidebar-toggle');
+    if (!toggleBtn) {
+        toggleBtn = document.createElement('button');
+        toggleBtn.className = 'mobile-sidebar-toggle';
+        toggleBtn.type = 'button';
+        toggleBtn.setAttribute('aria-label', 'Toggle Navigation Menu');
+        toggleBtn.innerHTML = `<span class="material-symbols-sharp">menu</span>`;
+        header.prepend(toggleBtn);
+    }
+
+    // Create backdrop overlay if not present
+    let backdrop = document.querySelector('.sidebar-backdrop');
+    if (!backdrop) {
+        backdrop = document.createElement('div');
+        backdrop.className = 'sidebar-backdrop';
+        document.body.appendChild(backdrop);
+    }
+
+    function toggleSidebar(open) {
+        const isOpen = typeof open === 'boolean' ? open : !sidebar.classList.contains('open');
+        if (isOpen) {
+            sidebar.classList.add('open');
+            backdrop.classList.add('active');
+            toggleBtn.innerHTML = `<span class="material-symbols-sharp">close</span>`;
+            document.body.style.overflow = 'hidden';
+        } else {
+            sidebar.classList.remove('open');
+            backdrop.classList.remove('active');
+            toggleBtn.innerHTML = `<span class="material-symbols-sharp">menu</span>`;
+            document.body.style.overflow = '';
+        }
+    }
+
+    toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleSidebar();
+    });
+
+    backdrop.addEventListener('click', () => {
+        toggleSidebar(false);
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && sidebar.classList.contains('open')) {
+            toggleSidebar(false);
+        }
+    });
+
+    // Close on navigation link click when on mobile screen
+    sidebar.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                toggleSidebar(false);
+            }
+        });
+    });
+}
+
+// =====================
 // Main DOMContentLoaded Logic
 // =====================
 
 document.addEventListener('DOMContentLoaded', () => {
+    initMobileNavigation();
     const originalData = tutorialsData;
 
     const isTutorialsPage = !!document.getElementById('tutorials-container');
@@ -673,8 +825,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (filterBtn && filterAreaElement) {
         filterBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            const currentDisplay = getComputedStyle(filterAreaElement).display;
-            filterAreaElement.style.display = (currentDisplay === "flex" || currentDisplay === "block") ? "none" : "flex";
+            filterAreaElement.classList.toggle('open');
         });
     }
 });
@@ -688,21 +839,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const toolsContainer = document.querySelector('.sandmod-sidebar-tools-list');
 
     if (toggleBtn && toolsContainer) {
-        const arrowSvg = toggleBtn.querySelector('.sandmod-sidebar-tool-btn-arrow-icon svg');
-        const isInitiallyOpen = getComputedStyle(toolsContainer).display === 'block';
-        if (arrowSvg) {
-            arrowSvg.innerHTML = isInitiallyOpen ? '<path d="m18 15-6-6-6 6"/>' : '<path d="m6 9 6 6 6-6"/>';
-        }
-
-        toggleBtn.addEventListener('click', () => {
-          const isOpen = toolsContainer.classList.toggle('open');
-          const path = arrowSvg.querySelector('path');
+        const arrowIcon = toggleBtn.querySelector('.sandmod-sidebar-tool-btn-arrow-icon');
         
-          if (path) {
-            path.setAttribute('d', isOpen 
-              ? 'm18 15-6-6-6 6'   // Arrow up
-              : 'm6 9 6 6 6-6');  // Arrow down
-          }
+        toggleBtn.addEventListener('click', () => {
+            const isOpen = toolsContainer.classList.toggle('open');
+            toggleBtn.classList.toggle('open', isOpen);
+            if (arrowIcon && !arrowIcon.querySelector('svg')) {
+                arrowIcon.textContent = isOpen ? 'expand_less' : 'expand_more';
+            }
         });
     }
 });
@@ -782,26 +926,19 @@ let currentAssetOverlay = null;
 
 function hideAndRemoveAssetDetailOverlay() {
     if (currentAssetOverlay) {
-        // Start the fade-out animation
-        currentAssetOverlay.classList.remove('visible');
+        currentAssetOverlay.classList.remove('show');
         
-        // Remove the element from the DOM after the transition ends
         setTimeout(() => {
             if (currentAssetOverlay && currentAssetOverlay.parentNode) {
                 currentAssetOverlay.parentNode.removeChild(currentAssetOverlay);
             }
             currentAssetOverlay = null;
-            document.body.style.overflow = ''; // Restore background scrolling
-        }, 300); // This duration MUST match your CSS transition duration
+            document.body.style.overflow = '';
+        }, 240);
     }
-    // Clean up the keydown listener when the overlay is closed
     document.removeEventListener('keydown', handleEscapeKeyForOverlay);
 }
 
-/**
- * Handles the 'Escape' key press to close the overlay.
- * @param {KeyboardEvent} event The keyboard event.
- */
 function handleEscapeKeyForOverlay(event) {
     if (event.key === 'Escape') {
         hideAndRemoveAssetDetailOverlay();
@@ -813,45 +950,54 @@ function handleEscapeKeyForOverlay(event) {
  * @param {object} assetData The data object for the asset to display.
  */
 function createAndShowAssetDetailOverlay(assetData) {
-    // If for some reason this is called with no data, do nothing.
     if (!assetData) {
         console.error("No asset data provided to create overlay.");
         return;
     }
-    // If an overlay is already open, close it first
     if (currentAssetOverlay) {
         hideAndRemoveAssetDetailOverlay();
     }
 
-    // --- Start Building the Overlay ---
-
-    // 1. Create the main overlay wrapper (the dark background)
     const overlayDiv = document.createElement('div');
     overlayDiv.className = 'overlay-window-asset';
-    // Add event listener to close when the dark background is clicked
     overlayDiv.addEventListener('click', (e) => {
-        if (e.target === overlayDiv) { // Ensure the click is on the backdrop itself
+        if (e.target === overlayDiv) {
             hideAndRemoveAssetDetailOverlay();
         }
     });
 
-    // 2. Create the content box
     const contentDiv = document.createElement('div');
     contentDiv.className = 'overlay-window-asset-content';
 
-    // 3. Create the close button
+    // 1. Drawer Header
+    const drawerHeader = document.createElement('div');
+    drawerHeader.className = 'asset-drawer-header';
+
+    const headerLeft = document.createElement('div');
+    headerLeft.className = 'asset-drawer-header-left';
+    const badgeSpan = document.createElement('span');
+    badgeSpan.className = 'asset-badge';
+    badgeSpan.innerHTML = `<span class="material-symbols-sharp" style="font-size: 14px;">${assetData.assetType === '3D' ? 'deployed_code' : 'inventory_2'}</span> ${assetData.assetType === '3D' ? '3D Model' : 'Asset Pack'}`;
+    headerLeft.appendChild(badgeSpan);
+    drawerHeader.appendChild(headerLeft);
+
     const closeButton = document.createElement('button');
     closeButton.className = 'close-overlay-btn';
-    closeButton.title = 'Close';
-    closeButton.innerHTML = `<span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e3e3e3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></span>`;
+    closeButton.title = 'Close (Esc)';
+    closeButton.innerHTML = `<span class="material-symbols-sharp">close</span>`;
     closeButton.addEventListener('click', hideAndRemoveAssetDetailOverlay);
-    contentDiv.appendChild(closeButton);
+    drawerHeader.appendChild(closeButton);
 
-    // 4. Create the preview area (for model-viewer or image)
+    contentDiv.appendChild(drawerHeader);
+
+    // 2. Scrollable Body
+    const drawerBody = document.createElement('div');
+    drawerBody.className = 'asset-drawer-body';
+
+    // Preview
     const previewArea = document.createElement('div');
     previewArea.className = 'asset-perview';
 
-    // Conditionally create <model-viewer> or <img>
     if (assetData.assetType === "3D" && assetData.assetModelSrc) {
         const modelViewer = document.createElement('model-viewer');
         modelViewer.className = 'asset-model-viewer';
@@ -860,7 +1006,6 @@ function createAndShowAssetDetailOverlay(assetData) {
         modelViewer.setAttribute('auto-rotate', '');
         modelViewer.setAttribute('camera-controls', '');
         modelViewer.setAttribute('shadow-intensity', '1');
-        modelViewer.className = 'asset-perview';
         previewArea.appendChild(modelViewer);
     } else if (assetData.assetPreviewImageSrc) {
         const img = document.createElement('img');
@@ -871,9 +1016,9 @@ function createAndShowAssetDetailOverlay(assetData) {
     } else {
         previewArea.innerHTML = '<div class="loading-indicator">No preview available.</div>';
     }
-    contentDiv.appendChild(previewArea);
+    drawerBody.appendChild(previewArea);
 
-    // 5. Create the details section
+    // Details info
     const detailsDiv = document.createElement('div');
     detailsDiv.className = 'asset-details';
 
@@ -882,47 +1027,56 @@ function createAndShowAssetDetailOverlay(assetData) {
     titleH2.textContent = assetData.videoTitle || 'Asset Details';
     detailsDiv.appendChild(titleH2);
 
-    const descriptionP = document.createElement('p');
-    descriptionP.className = 'asset-description';
-    descriptionP.textContent = assetData.assetDescription || 'No description provided.';
-    detailsDiv.appendChild(descriptionP);
+    // Author line (simple inline)
+    const authorMeta = document.createElement('div');
+    authorMeta.className = 'asset-drawer-author';
+    const authorImg = document.createElement('img');
+    authorImg.src = assetData.authorPfpSrc || './assets/default_pfp.png';
+    authorImg.alt = assetData.authorName || 'Author';
+    authorImg.className = 'asset-drawer-author-img';
+    const authorText = document.createElement('span');
+    authorText.className = 'asset-drawer-author-text';
+    authorText.innerHTML = `by <strong class="asset-drawer-author-name">${assetData.authorName || 'Anonymous'}</strong>`;
+    authorMeta.appendChild(authorImg);
+    authorMeta.appendChild(authorText);
+    detailsDiv.appendChild(authorMeta);
 
-    // 6. Create the actions section (download button)
-    const actionsDiv = document.createElement('div');
-    actionsDiv.className = 'asset-actions';
+    // Description (simple text paragraph)
+    if (assetData.assetDescription) {
+        const descriptionP = document.createElement('p');
+        descriptionP.className = 'asset-description';
+        descriptionP.textContent = assetData.assetDescription;
+        detailsDiv.appendChild(descriptionP);
+    }
+
+    drawerBody.appendChild(detailsDiv);
+    contentDiv.appendChild(drawerBody);
+
+    // 3. Footer (Sticky Action)
     if (assetData.assetDownloadLink) {
+        const drawerFooter = document.createElement('div');
+        drawerFooter.className = 'asset-drawer-footer';
+
         const downloadLink = document.createElement('a');
         downloadLink.className = 'download-asset-btn';
         downloadLink.href = assetData.assetDownloadLink;
-        downloadLink.textContent = `Download`;
+        downloadLink.innerHTML = `<span class="material-symbols-sharp">download</span> Download Asset`;
         const filename = assetData.assetDownloadLink.substring(assetData.assetDownloadLink.lastIndexOf('/') + 1);
         downloadLink.setAttribute('download', filename || 'asset');
-        actionsDiv.appendChild(downloadLink);
+        drawerFooter.appendChild(downloadLink);
+
+        contentDiv.appendChild(drawerFooter);
     }
-    detailsDiv.appendChild(actionsDiv);
-    contentDiv.appendChild(detailsDiv);
 
-    // --- Final Assembly and Display ---
-
-    // Put the content box inside the overlay wrapper
     overlayDiv.appendChild(contentDiv);
-
-    // Add the completed overlay to the page
     document.body.appendChild(overlayDiv);
-    
-    // Store a reference to it so we can remove it later
     currentAssetOverlay = overlayDiv;
-
-    // Prevent the main page from scrolling while the overlay is open
     document.body.style.overflow = 'hidden';
 
-    // Use requestAnimationFrame to ensure the element is in the DOM before adding the 'visible' class,
-    // which triggers the CSS fade-in transition.
     requestAnimationFrame(() => {
-        overlayDiv.classList.add('visible');
+        overlayDiv.classList.add('show');
     });
 
-    // Add listener for the Escape key
     document.addEventListener('keydown', handleEscapeKeyForOverlay);
 }
 
@@ -949,7 +1103,7 @@ function bookmarkById(buttonElement, tutorialId) {
 }
 
 /**
- * Share a tutorial using the Web Share API or fallback prompt.
+ * Share a tutorial using the Web Share API or copy to clipboard with toast.
  * @param {string} tutorialId - The tutorial's unique identifier.
  */
 function shareById(tutorialId) {
@@ -959,7 +1113,7 @@ function shareById(tutorialId) {
 
     if (!tutorialData) {
         console.error(`Share failed: Tutorial with ID "${tutorialId}" not found.`);
-        alert("Could not find tutorial data to share.");
+        showSandModToast("Could not find tutorial data to share.", "error");
         return;
     }
 
@@ -973,8 +1127,14 @@ function shareById(tutorialId) {
             text: shareText,
             url: shareURL,
         }).catch(error => console.log('Error sharing:', error));
+    } else if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(shareURL).then(() => {
+            showSandModToast('Tutorial link copied to clipboard!', 'success');
+        }).catch(() => {
+            showSandModToast(`Share link: ${shareURL}`, 'info');
+        });
     } else {
-        prompt("Copy this link to share the tutorial:", shareURL);
+        showSandModToast(`Share link: ${shareURL}`, 'info');
     }
 }
 
@@ -1010,3 +1170,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+
+

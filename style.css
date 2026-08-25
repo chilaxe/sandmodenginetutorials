@@ -1,26 +1,55 @@
 /* =========================
-    Variables
+    Theme Variables
     ========================= */
 :root {  
      --main-color_1: #a8b1ff;
      --main-color_2: #5c73e7;
      --main-color_3: #38383888;
+     --main-color_4: #3e56dd;
      --black-color: #1b1b1f;
+     --bg-sidebar: #151518;
+     --bg-card: #202024;
+     --bg-card-hover: rgba(92, 115, 231, 0.1);
+     --bg-input: #101214;
+     --border-color: #2e2e34;
      --grey-color: #414853;
      --grey-color_2: #515c67;
      --text-color: rgba(255, 255, 245, .86);
+     --text-muted: rgba(235, 235, 245, .6);
+     --text-heading: #ffffff;
+     --title-color: rgba(199, 199, 255, 0.9);
+     --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* =========================
     Base Styles
     ========================= */
+.material-symbols-sharp {
+     font-family: 'Material Symbols Sharp';
+     font-weight: 400;
+     font-style: normal;
+     font-size: 20px;
+     line-height: 1;
+     letter-spacing: normal;
+     text-transform: none;
+     display: inline-flex;
+     align-items: center;
+     justify-content: center;
+     white-space: nowrap;
+     word-wrap: normal;
+     direction: ltr;
+     -webkit-font-smoothing: antialiased;
+     font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
 body {
      font-family: "Punctuation SC", "Inter", ui-sans-serif, system-ui, "PingFang SC", "Noto Sans CJK SC", "Noto Sans SC", "Heiti SC", "Microsoft YaHei", "DengXian", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
      background-color: var(--black-color);
      color: var(--text-color);
      margin: 0;
      padding: 0;
-     overflow-x: hidden;
+     overflow-x: clip;
+     transition: 0.2s ease-in-out;
 }
 
 /* =========================
@@ -32,7 +61,7 @@ body {
      padding: 5px 20px;
      justify-content: center;
      color: var(--text-color);
-     border-bottom: 1px solid var(--grey-color);
+     border-bottom: 1px solid var(--border-color);
 }
 
 .sandmod-header-container {
@@ -40,8 +69,13 @@ body {
      align-items: center;
      justify-content: space-between;
      padding: 10px 20px;
-     background-color: var(--black-color);
-     border-bottom: 1px solid var(--grey-color);
+     background-color: rgba(23, 23, 27, 0.78);
+     backdrop-filter: blur(14px);
+     -webkit-backdrop-filter: blur(24px);
+     border-bottom: 1px solid var(--border-color);
+     position: sticky;
+     top: 0;
+     z-index: 100;
 }
 
 .sandmod-logo {
@@ -62,10 +96,11 @@ body {
      width: 200px;
      height: 100vh;
      color: var(--text-color);
-     border-right: 1px solid var(--grey-color);
+     border-right: 1px solid var(--border-color);
      padding: 10px 20px;
-     background-color: var(--black-color);
-     z-index: -1;
+     background-color: var(--bg-sidebar);
+     z-index: 10;
+     transition: background-color 0.25s ease, border-color 0.25s ease;
 }
 
 .sandmod-links-list {
@@ -77,8 +112,8 @@ body {
 .sandmod-link-sidebar {
      display: flex;
      align-items: center;
-     background-color: none;
-     color: rgba(235, 235, 245, .6);
+     background-color: transparent;
+     color: var(--text-muted);
      text-decoration: none;
      padding: 5px;
      margin: 5px;
@@ -99,8 +134,29 @@ body {
      stroke: var(--main-color_1);
 }
 
+.sandmod-link-sidebar .material-symbols-sharp,
+.sandmod-sidebar-tool .material-symbols-sharp,
+.sandmod-sidebar-tool-btn .material-symbols-sharp {
+     font-size: 20px;
+     margin-right: 10px;
+     color: var(--text-muted);
+     transition: color 0.2s ease-in-out;
+     display: inline-flex;
+     align-items: center;
+     justify-content: center;
+}
+
+.sandmod-link-sidebar:hover .material-symbols-sharp,
+.sandmod-link-sidebar.active .material-symbols-sharp,
+.sandmod-sidebar-tool:hover .material-symbols-sharp,
+.sandmod-sidebar-tool.active .material-symbols-sharp,
+.sandmod-sidebar-tool-btn:hover .material-symbols-sharp,
+.sandmod-sidebar-tool-btn:focus .material-symbols-sharp {
+     color: var(--main-color_1);
+}
+
 .sandmod-sidebar-tool {
-     border-left: 1px solid var(--grey-color);
+     border-left: 1px solid var(--border-color);
 }
 
 .sandmod-sidebar-tool:hover,
@@ -116,13 +172,13 @@ body {
 .sandmod-link-sidebar .sandmod-svg {
      width: 24px;
      height: 24px;
-     fill: rgba(235, 235, 245, .6);
+     fill: var(--text-muted);
 }
 
 .sandmod-link-sidebar svg {
      display: flex;
      margin-right: 10px;
-     stroke: rgba(235, 235, 245, .6);
+     stroke: var(--text-muted);
      transition: 0.2s ease-in-out;
 }
 
@@ -143,11 +199,11 @@ body {
 
 .sandmod-link-sidebar.links:hover {
      background-color: var(--main-color_2);
-     color: var(--text-color);
+     color: #ffffff;
 }
 
 .sandmod-link-sidebar.links:hover svg {
-     fill: var(--text-color);
+     fill: #ffffff;
 }
 
 /* Sidebar Tools */
@@ -157,7 +213,7 @@ body {
      position: relative;
      background-color: transparent;
      border: none;
-     color: rgba(235, 235, 245, .6);
+     color: var(--text-muted);
      text-decoration: none;
      padding: 5px;
      margin: 5px;
@@ -171,7 +227,7 @@ body {
 .sandmod-sidebar-tool-btn svg {
      display: flex;
      margin-right: 10px;
-     stroke: rgba(235, 235, 245, .6);
+     stroke: var(--text-muted);
      transition: 0.2s ease-in-out;
 }
 
@@ -183,6 +239,20 @@ body {
      height: 18px;
      transform: translateY(-50%);
      transition: 0.2s ease-in-out;
+}
+
+.sandmod-sidebar-tool-btn-arrow-icon.material-symbols-sharp {
+     position: absolute;
+     right: 0px;
+     top: 50%;
+     font-size: 20px;
+     margin-right: 0;
+     transform: translateY(-50%);
+     transition: transform 0.2s ease-in-out;
+}
+
+.sandmod-sidebar-tool-btn.open .sandmod-sidebar-tool-btn-arrow-icon.material-symbols-sharp {
+     transform: translateY(-50%) rotate(180deg);
 }
 
 .sandmod-sidebar-tool-btn:hover,
@@ -218,8 +288,8 @@ body {
 .sandmod-sidebar-tool {
      display: flex;
      align-items: center;
-     background-color: none;
-     color: rgba(235, 235, 245, .6);
+     background-color: transparent;
+     color: var(--text-muted);
      text-decoration: none;
      padding: 5px;
      font-weight: bold;
@@ -235,7 +305,7 @@ body {
 .sandmod-sidebar-tool svg {
      display: flex;
      margin-right: 10px;
-     stroke: rgba(235, 235, 245, .6);
+     stroke: var(--text-muted);
      transition: 0.2s ease-in-out;
 }
 
@@ -255,6 +325,9 @@ body {
      z-index: 0;
      position: absolute;
      width: calc(100% - 241px);
+     min-height: 100vh;
+     background-color: var(--black-color);
+     transition: background-color 0.25s ease;
 }
 
 /* =========================
@@ -269,140 +342,160 @@ body {
 .sandmod-tutorials-content {
      padding: 20px;
      background-color: var(--black-color);
+     display: flex;
+     flex-direction: column;
+     gap: 12px;
 }
 
 .sandmod-forum-tutorial {
      position: relative;
-     border: 1px solid #2e2e32;
-     padding: 5px;
-     transition: 0.2s ease-in-out;
+     display: flex;
+     flex-direction: column;
+     gap: 10px;
+     padding: 14px 16px;
+     border: 1px solid var(--border-color);
+     border-radius: 8px;
+     background-color: var(--bg-card);
+     transition: border-color 0.2s ease, background-color 0.2s ease;
      cursor: pointer;
      width: 100%;
-     height: 90px;
-     margin: 0px;
-     border: none;
-     border-bottom: 1px solid #2e2e32;
-     border-left: 1px solid #2e2e32;
-     border-right: 1px solid #2e2e32;
-}
-
-.sandmod-forum-tutorial:first-child {
-  border-top: 1px solid #2e2e32;
-}
-
-.sandmod-forum-tutorial:has(+ .sandmod-forum-tutorial:hover) {
-  border-bottom-color: var(--main-color_1);
+     box-sizing: border-box;
 }
 
 .sandmod-forum-tutorial:hover {
      border-color: var(--main-color_1);
-     background-color: rgba(92, 115, 231, 0.1);
+     background-color: var(--bg-card-hover);
 }
 
-.sandmod-tutorial-header {
+.sandmod-tutorial-card-header {
      display: flex;
-     align-items: flex-start;
+     align-items: center;
+     justify-content: space-between;
+     gap: 10px;
      width: 100%;
-     height: 20px;
-     border-radius: 5px 5px 0px 0px;
+}
+
+.sandmod-tutorial-title-group {
+     display: flex;
+     align-items: center;
+     gap: 10px;
+     flex-grow: 1;
+     min-width: 0;
 }
 
 .tutorial-ico {
-     width: 20px;
-     height: 20px;
-     margin-right: 5px;
-}
-
-.tutorial-ico svg {
-     width: 20px;
-     height: 20px;
-     stroke: rgba(235, 235, 245, .6);
-}
-
-.tutorial-type {
-     display: flex;
+     display: inline-flex;
      align-items: center;
-     justify-content: flex-start;
-     margin-right: auto;
-     position: absolute;
-     top: 5px;
-     right: 5px;
+     justify-content: center;
+     flex-shrink: 0;
 }
 
-.type-1,
-.type-2 {
-     padding: 2px 5px;
-     border-radius: 3px;
+.tutorial-ico .material-symbols-sharp {
+     font-size: 20px;
+     color: var(--text-muted);
+     transition: color 0.2s ease;
 }
 
-.type-1 svg,
-.type-2 svg {
-     width: 16px;
-     height: 16px;
-     stroke: rgba(235, 235, 245, .6);
-}
-
-.tutorial-maincontent {
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     gap: 10px;
-     padding: 10px;
-     color: var(--text-color);
+.sandmod-forum-tutorial:hover .tutorial-ico .material-symbols-sharp {
+     color: var(--main-color_1);
 }
 
 .tutorial-title {
-     display: flex;
-     flex-direction: column;
-     align-items: flex-start;
-     font-size: 14px;
-     font-weight: bold;
-     color: rgba(199, 199, 255, 0.781);
-     margin-bottom: 2px;
-     width: 100%;
+     font-size: 14.5px;
+     font-weight: 600;
+     color: var(--text-heading);
+     margin: 0;
      white-space: nowrap;
      overflow: hidden;
      text-overflow: ellipsis;
+     font-family: 'Inter', sans-serif;
+     line-height: 1.4;
+     transition: color 0.2s ease;
 }
 
-.tutorial-credits {
+.sandmod-forum-tutorial:hover .tutorial-title {
+     color: var(--main-color_1);
+}
+
+.sandmod-tutorial-type-badge {
+     display: inline-flex;
+     align-items: center;
+     gap: 4px;
+     font-size: 12px;
+     font-weight: 500;
+     color: var(--text-muted);
+     flex-shrink: 0;
+}
+
+.sandmod-tutorial-type-badge .material-symbols-sharp {
+     font-size: 16px;
+     color: var(--text-muted);
+}
+
+.sandmod-tutorial-card-footer {
      display: flex;
      align-items: center;
-     position: relative;
-     color: rgba(235, 235, 245, .6);
-     font-size: 12px;
+     justify-content: space-between;
      width: 100%;
 }
 
 .tutorial-credit-pfp {
      display: flex;
      align-items: center;
-     gap: 6px;
+     gap: 8px;
 }
 
 .tutorial-credit-pfp-img {
-     width: 24px;
-     height: 24px;
+     width: 22px;
+     height: 22px;
      border-radius: 50%;
      overflow: hidden;
      flex-shrink: 0;
-}
-
-.tutorial-credit-pfp-img img {
-     width: 100%;
-     height: 100%;
-     object-fit: cover;
+     border: 1px solid var(--border-color);
      display: block;
 }
 
 .tutorial-credit-pf-name {
-     color: rgba(235, 235, 245, .6);
-     text-decoration: none;
-     transition: color 0.2s ease-in-out;
-     display: inline-block;
+     color: var(--text-muted);
+     font-size: 12.5px;
+     font-weight: 500;
+     font-family: 'Inter', sans-serif;
      white-space: nowrap;
-     width: 100%;
-     overflow: hidden;
+}
+
+.tools-tutorial {
+     display: flex;
+     align-items: center;
+     gap: 4px;
+}
+
+.sandmod-tutorial-tools-btn {
+     background-color: transparent;
+     border: none;
+     width: 28px;
+     height: 28px;
+     border-radius: 6px;
+     color: rgba(235, 235, 245, .6);
+     cursor: pointer;
+     display: inline-flex;
+     align-items: center;
+     justify-content: center;
+     transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sandmod-tutorial-tools-btn:hover {
+     background-color: rgba(255, 255, 255, 0.06);
+}
+
+.sandmod-tutorial-tools-btn .material-symbols-sharp {
+     font-size: 18px;
+     color: rgba(235, 235, 245, .6);
+     transition: color 0.2s ease-in-out, transform 0.15s ease;
+}
+
+.sandmod-tutorial-tools-btn:hover .material-symbols-sharp,
+.sandmod-tutorial-tools-btn.bookmarked .material-symbols-sharp {
+     color: var(--main-color_1);
 }
 
 /* =========================
@@ -417,77 +510,115 @@ body {
 
 .sandmod-asset-item {
      position: relative;
-     padding: 10px;
-     border: 1px solid var(--grey-color);
-     transition: 0.2s ease-in-out;
-     width: 240px;
+     display: flex;
+     flex-direction: column;
+     padding: 12px;
+     border: 1px solid var(--border-color);
+     background-color: var(--bg-card);
+     border-radius: 10px;
+     transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+     width: 100%;
+     box-sizing: border-box;
      cursor: pointer;
 }
 
 .sandmod-asset-item:hover {
      border-color: var(--main-color_1);
+     background-color: var(--bg-card-hover);
 }
 
 .sandmod-asset-header {
+     position: absolute;
+     top: 18px;
+     left: 18px;
+     right: 18px;
      display: flex;
      align-items: center;
-     gap: 10px;
-     height: 32px;
+     justify-content: space-between;
+     z-index: 3;
+     pointer-events: none;
 }
 
-.sandmod-asset-header svg {
-     width: 20px;
-     height: 20px;
-     stroke: rgba(235, 235, 245, .6);
+.sandmod-asset-type-icon,
+.sandmod-asset-type-2 {
+     display: inline-flex;
+     align-items: center;
+     justify-content: center;
+     width: 28px;
+     height: 28px;
+     border-radius: 6px;
+     background: rgba(18, 18, 22, 0.78);
+     backdrop-filter: blur(8px);
+     -webkit-backdrop-filter: blur(8px);
+     border: 1px solid rgba(255, 255, 255, 0.09);
+     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
 }
 
-.sandmod-asset-preview-image {
+.sandmod-asset-type-icon .material-symbols-sharp,
+.sandmod-asset-type-2 .material-symbols-sharp {
+     font-size: 16px;
+     color: rgba(235, 235, 245, 0.75);
+}
+
+.sandmod-asset-preview-image,
+.sandmod-asset-preview-3d,
+.sandmod-asset-preview-placeholder {
      width: 100%;
      height: 200px;
      overflow: hidden;
-     border-radius: 5px;
+     border-radius: 8px;
+     background-color: #121215;
+     border: 1px solid rgba(255, 255, 255, 0.04);
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     position: relative;
 }
 
-.sandmod-asset-type-2 {
-     position: absolute;
-     top: 10px;
-     right: 10px;
+.sandmod-asset-preview-image img {
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+     transition: transform 0.3s ease;
 }
 
-.sandmod-asset-type-icon svg {
-     position: absolute;
-     top: 10px;
-     left: 10px;
+.sandmod-asset-item:hover .sandmod-asset-preview-image img {
+     transform: scale(1.03);
+}
+
+.sandmod-asset-model-viewer {
+     width: 100%;
+     height: 100%;
+     background-color: #121215;
 }
 
 .sandmod-asset-info {
      display: flex;
      flex-direction: column;
-     align-items: flex-start;
-     gap: 5px;
-     margin-top: 10px;
+     margin-top: 12px;
 }
 
 .sandmod-asset-title {
-     font-size: 14px;
-     font-weight: bold;
-     color: rgba(199, 199, 255, 0.781);
-     margin-bottom: 5px;
+     font-size: 14.5px;
+     font-weight: 600;
+     color: var(--text-heading);
+     margin: 0;
      width: 100%;
      white-space: nowrap;
      overflow: hidden;
      text-overflow: ellipsis;
+     font-family: 'Inter', sans-serif;
+     transition: color 0.2s ease;
 }
 
-.sandmod-asset-model-viewer {
-     width: 100%;
-     background-color: #272727;
+.sandmod-asset-item:hover .sandmod-asset-title {
+     color: var(--main-color_1);
 }
 
 .sandmod-assets-content {
      display: grid;
-     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-     gap: 16px 16px;
+     grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+     gap: 16px;
      padding: 20px;
      background-color: var(--black-color);
 }
@@ -495,13 +626,35 @@ body {
 .sandmod-tool-asset {
      background-color: transparent;
      border: none;
-     margin: 5px;
-     padding: 0px;
+     width: 28px;
+     height: 28px;
+     border-radius: 6px;
+     color: rgba(235, 235, 245, .6);
+     cursor: pointer;
+     display: inline-flex;
+     align-items: center;
+     justify-content: center;
+     transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.sandmod-tool-asset:hover {
+     background-color: rgba(255, 255, 255, 0.06);
+}
+
+.sandmod-tool-asset .material-symbols-sharp {
+     font-size: 18px;
+     color: rgba(235, 235, 245, .6);
+     transition: color 0.2s ease-in-out, transform 0.15s ease;
+}
+
+.sandmod-tool-asset:hover .material-symbols-sharp,
+.sandmod-tool-asset.bookmarked .material-symbols-sharp {
+     color: var(--main-color_1);
 }
 
 .sandmod-tool-asset svg {
-     width: 24px;
-     height: 24px;
+     width: 20px;
+     height: 20px;
      stroke: rgba(235, 235, 245, .6);
      transition: 0.2s ease-in-out;
      cursor: pointer;
@@ -511,9 +664,19 @@ body {
      stroke: var(--main-color_1);
 }
 
-.credits-assets,
+.credits-assets {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     margin-top: 10px;
+     padding-top: 8px;
+     border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
 .tools-assets {
      display: flex;
+     align-items: center;
+     gap: 2px;
 }
 
 /* =========================
@@ -529,7 +692,7 @@ body {
 .sandmod-favorites-section h2 {
      font-size: 16px;
      font-weight: bold;
-     color: #acacac;
+     color: var(--text-muted);
      margin: 0px;
 }
 
@@ -540,7 +703,6 @@ body {
      display: flex;
      align-items: center;
      justify-content: space-between;
-     background-color: var(--black-color);
 }
 
 .sandmod-tutorial-filter-btn {
@@ -548,7 +710,7 @@ body {
      align-items: center;
      background-color: transparent;
      border: none;
-     color: rgba(235, 235, 245, .6);
+     color: var(--text-muted);
      text-decoration: none;
      padding: 5px;
      font-weight: bold;
@@ -561,8 +723,18 @@ body {
      display: flex;
      margin-left: 5px;
      margin-right: 5px;
-     stroke: rgba(235, 235, 245, .6);
+     stroke: var(--text-muted);
      transition: 0.2s ease-in-out;
+}
+
+.sandmod-tutorial-filter-btn .material-symbols-sharp,
+.filter-btn .material-symbols-sharp {
+     font-size: 18px;
+     color: var(--text-muted);
+     transition: color 0.2s ease-in-out;
+     display: inline-flex;
+     align-items: center;
+     justify-content: center;
 }
 
 .sandmod-tutorial-filter-btn:hover svg,
@@ -570,16 +742,40 @@ body {
      stroke: var(--main-color_1);
 }
 
+.sandmod-tutorial-filter-btn:hover .material-symbols-sharp,
+.sandmod-tutorial-filter-btn.active .material-symbols-sharp,
+.filter-btn:hover .material-symbols-sharp {
+     color: var(--main-color_1);
+}
+
 .sandmod-tutorial-filter-btn.active {
      color: var(--main-color_1);
 }
 
 .filter-area {
-     display: none;
-     border-left: 1px solid var(--grey-color);
+     display: flex;
+     max-width: 0;
+     opacity: 0;
+     overflow: hidden;
+     transform: scaleX(0.88);
+     transform-origin: left center;
+     border-left: 0px solid transparent;
      align-items: center; 
-     padding-left: 5px;
-     transition: 0.2s ease-in-out;
+     padding-left: 0;
+     white-space: nowrap;
+     transition: max-width 0.28s cubic-bezier(0.16, 1, 0.3, 1), 
+                 opacity 0.22s ease, 
+                 transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), 
+                 padding 0.28s ease, 
+                 border 0.28s ease;
+}
+
+.filter-area.open {
+     max-width: 320px;
+     opacity: 1;
+     transform: scaleX(1);
+     border-left: 1px solid var(--border-color);
+     padding-left: 6px;
 }
 
 .filter-btn {
@@ -587,7 +783,7 @@ body {
      align-items: center;
      background-color: transparent;
      border: none;
-     color: rgba(235, 235, 245, .6);
+     color: var(--text-muted);
      text-decoration: none;
      font-weight: bold;
      font-size: 13px;
@@ -595,8 +791,9 @@ body {
 }
 
 .filter-btn:hover svg {
-     stroke: rgba(235, 235, 245, .6);
+     stroke: var(--text-muted);
 }
+
 
 /* =========================
     Search
@@ -606,7 +803,7 @@ body {
      align-items: center;
      background-color: transparent;
      border: none;
-     color: rgba(235, 235, 245, .6);
+     color: var(--text-muted);
      text-decoration: none;
      font-weight: bold;
      font-size: 13px;
@@ -619,16 +816,16 @@ body {
 }
 
 .sandmod-search-input {
-     background-color: transparent;
+     background-color: var(--bg-input);
      border: none;
-     color: rgba(235, 235, 245, .6);
+     color: var(--text-color);
      font-size: 13px;
-     padding: 5px;
+     padding: 5px 12px;
      width: 300px;
      height: 24px;
      outline: none;
      transition: border-color 0.2s ease-in-out;
-     border: 1px solid var(--grey-color);
+     border: 1px solid var(--border-color);
      border-radius: 0px 24px 24px 0px;
      border-left: none;
 }
@@ -641,9 +838,9 @@ body {
      display: flex;
      align-items: center;
      justify-content: center;
-     background-color: transparent;
+     background-color: var(--bg-card);
      border: none;
-     color: rgba(235, 235, 245, .6);
+     color: var(--text-muted);
      text-decoration: none;
      padding: 5px;
      font-weight: bold;
@@ -652,21 +849,32 @@ body {
      height: 36px;
      transition: 0.2s ease-in-out;
      border-radius: 24px 0px 0px 24px;
-     border: 1px solid var(--grey-color);
+     border: 1px solid var(--border-color);
      border-right: none;
      cursor: pointer;
+}
+
+.sandmod-search-button .material-symbols-sharp {
+     font-size: 18px;
+     color: var(--text-muted);
+     transition: color 0.2s ease-in-out;
 }
 
 .sandmod-search-button svg {
      width: 16px;
      height: 16px;
      display: flex;
-     stroke: rgba(235, 235, 245, .6);
+     stroke: var(--text-muted);
      transition: 0.2s ease-in-out;
 }
 
 .sandmod-search-form:focus-within .sandmod-search-button {
      border-color: var(--main-color_1);
+}
+
+.sandmod-search-form:focus-within .sandmod-search-button .material-symbols-sharp,
+.sandmod-search-button:hover .material-symbols-sharp {
+     color: var(--main-color_1);
 }
 
 /* =========================
@@ -733,40 +941,7 @@ body {
      margin-left: 5px;
 }
 
-.sandmod-tutorial-tools-btn {
-     position: absolute;
-     bottom: 0px;
-     right: 22px;
-     background-color: transparent;
-     border: none;
-     color: rgba(235, 235, 245, .6);
-     text-decoration: none;
-     font-weight: bold;
-     font-size: 13px;
-     transition: 0.2s ease-in-out;
-     cursor: pointer;
-}
 
-.sandmod-tutorial-tools-btn:not(:first-child) {
-     position: absolute;
-     bottom: 0px;
-     right: -10px;
-}
-
-.sandmod-tutorial-tools-btn svg {
-     display: flex;
-     stroke: rgba(235, 235, 245, .6);
-     transition: 0.2s ease-in-out;
-}
-
-.sandmod-tutorial-tools-btn:hover svg {
-     stroke: var(--main-color_1);
-}
-
-.tools-tutorial {
-     display: flex;
-     align-items: center;
-}
 
 /* =========================
     Scrollbar
@@ -806,89 +981,324 @@ body {
      left: 0;
      width: 100%;
      height: 100%;
-     background-color: rgba(0, 0, 0, 0.8);
-     display: flex;
-     align-items: center;
-     justify-content: center;
-     z-index: 20;
+     background-color: rgba(0, 0, 0, 0.6);
+     backdrop-filter: blur(8px);
+     -webkit-backdrop-filter: blur(8px);
+     z-index: 1000;
+     opacity: 0;
+     visibility: hidden;
+     transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.28s;
+}
+
+.overlay-window-asset.show {
+     opacity: 1;
+     visibility: visible;
 }
 
 .overlay-window-asset-content {
-    background-color: var(--black-color);
-    padding: 20px;
-    border-radius: 5px;
-    width: 80%;
-    max-width: 600px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border: 1px solid var(--grey-color);
-    position: relative;
+     position: fixed;
+     top: 0;
+     right: 0;
+     bottom: 0;
+     width: 480px;
+     max-width: 92vw;
+     height: 100%;
+     background-color: #17171b;
+     border-left: 1px solid rgba(255, 255, 255, 0.08);
+     box-shadow: -16px 0 48px rgba(0, 0, 0, 0.75), inset 1px 0 0 rgba(255, 255, 255, 0.05);
+     display: flex;
+     flex-direction: column;
+     transform: translateX(100%);
+     transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+     z-index: 1001;
+     box-sizing: border-box;
+}
+
+.overlay-window-asset.show .overlay-window-asset-content {
+     transform: translateX(0);
+}
+
+.asset-drawer-header {
+     padding: 18px 24px;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+     background-color: rgba(23, 23, 27, 0.85);
+     backdrop-filter: blur(12px);
+     -webkit-backdrop-filter: blur(12px);
+     flex-shrink: 0;
+}
+
+.asset-drawer-header-left {
+     display: flex;
+     align-items: center;
+     gap: 10px;
 }
 
 .close-overlay-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: transparent;
-    border: none;
-    color: rgba(235, 235, 245, .6);
-    cursor: pointer;
+     background-color: rgba(255, 255, 255, 0.06);
+     border: 1px solid rgba(255, 255, 255, 0.08);
+     color: var(--text-muted);
+     border-radius: 8px;
+     width: 32px;
+     height: 32px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     cursor: pointer;
+     transition: background-color 0.2s, color 0.2s, border-color 0.2s, transform 0.15s ease;
+}
+
+.close-overlay-btn .material-symbols-sharp {
+     font-size: 18px;
+}
+
+.close-overlay-btn:hover {
+     background-color: rgba(239, 68, 68, 0.18);
+     border-color: rgba(239, 68, 68, 0.4);
+     color: #ef4444;
+     transform: scale(1.05);
+}
+
+.asset-drawer-body {
+     padding: 20px 24px;
+     overflow-y: auto;
+     display: flex;
+     flex-direction: column;
+     gap: 16px;
+     flex-grow: 1;
+     overflow: hidden;
 }
 
 .asset-perview {
-    width: 100%;
-    height: 300px;
-    border-radius: 5px;
-    overflow: hidden;
-    background-color: #272727;
-    margin-top: 20px;
+     width: 100%;
+     height: 250px;
+     border-radius: 8px;
+     overflow: hidden;
+     background-color: #111114;
+     border: 1px solid var(--border-color);
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     position: relative;
+     flex-shrink: 0;
+}
+
+.asset-perview model-viewer,
+.asset-model-viewer {
+     width: 100%;
+     height: 100%;
+     --poster-color: transparent;
+}
+
+.asset-thumbnail-img {
+     max-width: 100%;
+     max-height: 100%;
+     object-fit: contain;
 }
 
 .asset-details {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+     display: flex;
+     flex-direction: column;
+     gap: 10px;
+}
+
+.asset-badge {
+     display: inline-flex;
+     align-items: center;
+     gap: 5px;
+     background-color: rgba(92, 115, 231, 0.15);
+     color: var(--main-color_1);
+     border: 1px solid rgba(168, 177, 255, 0.2);
+     font-size: 11px;
+     font-weight: 600;
+     text-transform: uppercase;
+     letter-spacing: 0.5px;
+     padding: 3px 10px;
+     border-radius: 20px;
 }
 
 .asset-title {
-    font-size: 18px;
-    font-weight: bold;
-    color: rgba(199, 199, 255, 0.781);
-    margin: 0px;
-    padding: 0px;
-    margin-top: 5px;
+     font-size: 20px;
+     font-weight: 700;
+     color: var(--text-heading);
+     margin: 0;
+     line-height: 1.3;
+     font-family: 'Inter', sans-serif;
+}
+
+.asset-drawer-author {
+     display: flex;
+     align-items: center;
+     gap: 8px;
+     font-size: 13px;
+     color: var(--text-muted);
+}
+
+.asset-drawer-author-img {
+     width: 22px;
+     height: 22px;
+     border-radius: 50%;
+     object-fit: cover;
+     display: block;
+}
+
+.asset-drawer-author-text {
+     color: var(--text-muted);
+     font-size: 13px;
+}
+
+.asset-drawer-author-name {
+     color: var(--text-heading);
+     font-weight: 600;
 }
 
 .asset-description {
-    font-size: 14px;
-    color: rgba(235, 235, 245, .6);
-    margin: 0px;
-    padding: 0px;
+     font-size: 13.5px;
+     color: var(--text-muted);
+     line-height: 1.5;
+     margin: 0;
+     margin-top: 4px;
 }
 
-.asset-actions {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
+.asset-drawer-footer {
+     padding: 16px 24px;
+     border-top: 1px solid var(--border-color);
+     background-color: #17171b;
+     flex-shrink: 0;
 }
 
 .download-asset-btn {
-    color: var(--text-color);
-    border: 1px solid var(--grey-color);
-    padding: 10px 20px;
-    border-radius: 5px;
-    width: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    cursor: pointer;
-    transition: 0.2s ease-in-out;
+     color: #ffffff;
+     background-color: var(--main-color_2);
+     border: 1px solid var(--main-color_2);
+     padding: 10px 18px;
+     border-radius: 8px;
+     width: 100%;
+     box-sizing: border-box;
+     display: inline-flex;
+     align-items: center;
+     justify-content: center;
+     gap: 8px;
+     text-decoration: none;
+     font-weight: 600;
+     font-size: 14px;
+     font-family: 'Inter', sans-serif;
+     cursor: pointer;
+     transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .download-asset-btn:hover {
-    border-color: var(--main-color_2);
-    color: #a3a3a3;
+     background-color: var(--main-color_4);
+     border-color: var(--main-color_4);
+     color: #ffffff;
 }
+
+.download-asset-btn:active {
+     opacity: 0.9;
+}
+
+.download-asset-btn .material-symbols-sharp {
+     font-size: 18px;
+     color: #ffffff;
+}
+
+/* =========================
+    Custom Confirm / Alert Modal
+    ========================= */
+.sandmod-confirm-modal {
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background-color: rgba(0, 0, 0, 0.75);
+     backdrop-filter: blur(8px);
+     -webkit-backdrop-filter: blur(8px);
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     z-index: 2000;
+     opacity: 0;
+     pointer-events: none;
+     transition: opacity 0.2s ease;
+}
+
+.sandmod-confirm-modal.open {
+     opacity: 1;
+     pointer-events: auto;
+}
+
+.sandmod-confirm-dialog {
+     background-color: var(--bg-card);
+     border: 1px solid var(--border-color);
+     border-radius: 14px;
+     padding: 24px;
+     width: 90%;
+     max-width: 420px;
+     box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
+     transform: scale(0.95);
+     transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sandmod-confirm-modal.open .sandmod-confirm-dialog {
+     transform: scale(1);
+}
+
+.sandmod-confirm-title {
+     font-size: 17px;
+     font-weight: 700;
+     color: var(--text-heading);
+     margin: 0 0 10px 0;
+}
+
+.sandmod-confirm-msg {
+     font-size: 14px;
+     color: var(--text-muted);
+     line-height: 1.5;
+     margin: 0 0 20px 0;
+}
+
+.sandmod-confirm-actions {
+     display: flex;
+     justify-content: flex-end;
+     gap: 10px;
+}
+
+.sandmod-btn-cancel {
+     background-color: transparent;
+     color: var(--text-muted);
+     border: 1px solid var(--border-color);
+     padding: 8px 16px;
+     border-radius: 8px;
+     font-size: 13.5px;
+     font-weight: 600;
+     cursor: pointer;
+     transition: background-color 0.2s, color 0.2s;
+}
+
+.sandmod-btn-cancel:hover {
+     background-color: var(--bg-input);
+     color: var(--text-color);
+}
+
+.sandmod-btn-confirm {
+     background-color: var(--main-color_2);
+     color: #ffffff;
+     border: 1px solid transparent;
+     padding: 8px 18px;
+     border-radius: 8px;
+     font-size: 13.5px;
+     font-weight: 600;
+     cursor: pointer;
+     transition: background-color 0.2s;
+}
+
+.sandmod-btn-confirm:hover {
+     background-color: var(--main-color_4);
+}
+
 
 /* =========================
     404 Not Found Styling
@@ -907,24 +1317,24 @@ body {
 .heading-404 {
     font-size: 150px;
     font-weight: 900;
-    color: #8A91FF;
+    color: var(--main-color_1);
     line-height: 1;
     margin: 0px;
 }
 .icon-container svg {
     width: 6rem;
     height: 6rem;
-    color: #8A91FF;
+    color: var(--main-color_1);
 }
 .subheading {
     font-size: 2.25rem;
     font-weight: 700;
-    color: #f3f4f6;
+    color: var(--text-heading);
 }
 .description {
     margin-top: 1rem;
     font-size: 1.125rem;
-    color: #9ca3af;
+    color: var(--text-muted);
 }
 .button-container {
     margin-top: 2.5rem;
@@ -933,17 +1343,21 @@ body {
     display: inline-flex;
     align-items: center;
     padding: 0.75rem 1.5rem;
-    border: 1px solid #8A91FF;
+    border: 1px solid var(--main-color_1);
     border-radius: 0.5rem;
     font-size: 1.125rem;
     font-weight: 600;
-    color: #8A91FF;
+    color: var(--main-color_1);
     text-decoration: none;
     transition: background-color 0.3s, color 0.3s;
 }
 .home-button:hover {
-    background-color: #8A91FF;
-    color: #111827;
+    background-color: var(--main-color_1);
+    color: #ffffff;
+}
+.home-button .material-symbols-sharp {
+    font-size: 1.25rem;
+    margin-right: 0.5rem;
 }
 .home-button svg {
     height: 1.25rem;
@@ -953,7 +1367,7 @@ body {
 .icon-main-container svg {
     width: 8rem;
     height: 8rem;
-    color: #8A91FF;
+    color: var(--main-color_1);
     margin-bottom: 2rem;
 }
 
@@ -983,8 +1397,12 @@ body {
 }
 
 .notice {
-     border: 1px solid #2e2e32;
-     padding: 5px;
+     border: 1px solid var(--border-color);
+     background-color: var(--bg-card);
+     padding: 10px;
+     border-radius: 6px;
+     margin-top: 10px;
+     overflow: hidden;
 }
 
 .notice p {
@@ -994,17 +1412,290 @@ body {
 
 .notice strong {
      font-size: 12px;
-     color: #6a7fe6;
+     color: var(--main-color_1);
      padding-bottom: 5px;
 }
 
 .noticetxt {
      font-size: 12px;
-     color: #9ca3af;
+     color: var(--text-muted);
 }
 
 .mailtxt {
      text-decoration: none;
-     color: #8A91FF;
-     font-size: 9.5px;
+     color: var(--main-color_1);
+     font-size: 11px;
 }
+
+/* =========================
+    Toast Notification System
+    ========================= */
+.sandmod-toast-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 99999;
+    pointer-events: none;
+}
+
+.sandmod-toast {
+    background-color: var(--bg-card);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    pointer-events: auto;
+    animation: toastSlideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transition: opacity 0.25s, transform 0.25s;
+    max-width: 350px;
+}
+
+.sandmod-toast.hiding {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+}
+
+.sandmod-toast-icon {
+    display: flex;
+    align-items: center;
+    color: var(--main-color_1);
+    flex-shrink: 0;
+}
+
+.sandmod-toast-success .sandmod-toast-icon {
+    color: #10b981;
+}
+
+.sandmod-toast-info .sandmod-toast-icon {
+    color: var(--main-color_1);
+}
+
+@keyframes toastSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ==========================================================================
+   Mobile & Responsive Design System
+   ========================================================================== */
+
+/* Mobile Sidebar Toggle Button (Hidden on Desktop) */
+.mobile-sidebar-toggle {
+    display: none;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    width: 34px;
+    height: 34px;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    cursor: pointer;
+    margin-right: 10px;
+    flex-shrink: 0;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.mobile-sidebar-toggle:hover {
+    background-color: var(--bg-card-hover);
+    border-color: var(--main-color_1);
+    color: var(--main-color_1);
+}
+
+.mobile-sidebar-toggle .material-symbols-sharp {
+    font-size: 20px;
+}
+
+/* Sidebar Backdrop Overlay */
+.sidebar-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 998;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+}
+
+.sidebar-backdrop.active {
+    display: block;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Tablet & Mobile Screens (<= 768px) */
+@media (max-width: 768px) {
+    .mobile-sidebar-toggle {
+        display: inline-flex;
+    }
+
+    /* Sidebar Drawer */
+    .sandmod-sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        z-index: 999;
+        width: 250px;
+        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
+    }
+
+    .sandmod-sidebar.open {
+        transform: translateX(0);
+    }
+
+    /* Main Content Full Width */
+    .sandmod-maincontent {
+        margin-left: 0 !important;
+        width: 100% !important;
+        position: relative !important;
+    }
+
+    /* Header Container Adaptations */
+    .sandmod-header-container {
+        padding: 10px 14px;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .sandmod-header-container .path {
+        font-size: 12.5px;
+        max-width: calc(100% - 90px);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Search Form on Mobile */
+    .sandmod-search {
+        order: 4;
+        width: 100%;
+        margin-top: 4px;
+    }
+
+    .sandmod-search-form {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .sandmod-search-input {
+        width: 100% !important;
+        font-size: 13.5px;
+    }
+
+    /* Filters on Mobile */
+    .filter {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .filter-area {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 2px;
+    }
+
+    /* Main Content Padding */
+    .sandmod-tutorials-content,
+    .sandmod-assets-content,
+    .sandmod-tutorial-content {
+        padding: 14px !important;
+    }
+
+    /* Tutorial Cards */
+    .sandmod-forum-tutorial {
+        padding: 12px 14px;
+    }
+
+    .tutorial-title {
+        font-size: 14px;
+        white-space: normal;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .sandmod-tutorial-card-header {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    /* Asset Grid on Mobile */
+    .sandmod-assets-grid {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+    }
+
+    /* Asset Detail Drawer Full Width on Mobile */
+    .overlay-window-asset-content {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* Confirm Modal on Mobile */
+    .sandmod-confirm-dialog {
+        width: 90% !important;
+        max-width: 90% !important;
+        margin: 0 auto;
+    }
+
+    /* Toast on Mobile */
+    .sandmod-toast-container {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        align-items: center;
+    }
+
+    .sandmod-toast {
+        max-width: 100%;
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+/* Small Smartphone Screens (<= 480px) */
+@media (max-width: 480px) {
+    .sandmod-header-container {
+        padding: 8px 12px;
+    }
+
+    .sandmod-tutorial-title {
+        font-size: 20px !important;
+    }
+
+    .sandmod-tutorial-subtitle {
+        font-size: 17px !important;
+    }
+
+    .sandmod-tutorial-paragraph {
+        font-size: 14px !important;
+    }
+
+    .sandmod-tutorial-card-footer {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .tutorial-meta-right {
+        margin-left: auto;
+    }
+}
+
